@@ -1,14 +1,15 @@
-export function About() {
-  const founderStats = [
-    { value: "$1B+", label: "REVENUE BRAND BUILT AT FASHION NOVA" },
-    { value: "100M+", label: "COMBINED REACH ACROSS CLIENT ROSTER" },
-    { value: "10+ YRS", label: "PIONEERING INFLUENCER MARKETING" },
-  ]
+"use client"
 
-  const teamMembers = [
-    { name: "Team Member Name", role: "ROLE TITLE", label: "TEAM MEMBER 01" },
-    { name: "Team Member Name", role: "ROLE TITLE", label: "TEAM MEMBER 02" },
-    { name: "Team Member Name", role: "ROLE TITLE", label: "TEAM MEMBER 03" },
+import { ArrowRight } from "lucide-react"
+import { useState } from "react"
+
+export function About() {
+  const [isHovered, setIsHovered] = useState(false)
+  
+  const founderStats = [
+    { value: "$1B+", label: "Revenue built at Fashion Nova" },
+    { value: "100M+", label: "Combined reach across clients" },
+    { value: "10+ YRS", label: "Pioneering influencer marketing" },
   ]
 
   return (
@@ -62,54 +63,38 @@ export function About() {
             </p>
 
             {/* Founder Stats */}
-            <div className="mt-8 flex flex-wrap gap-6 md:gap-8">
+            <div className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-center gap-0">
               {founderStats.map((stat, index) => (
-                <div key={index} className="flex items-baseline gap-6 md:gap-8">
-                  <div>
-                    <span className="font-[family-name:var(--font-anton)] text-2xl text-lma-cream md:text-3xl">
-                      {stat.value}
-                    </span>
-                    <p className="mt-1 font-sans text-[10px] uppercase tracking-[0.15em] text-lma-cream/50">
-                      {stat.label}
-                    </p>
-                  </div>
-                  {index < founderStats.length - 1 && (
-                    <div className="hidden h-12 w-px bg-lma-cream/15 md:block" />
-                  )}
+                <div 
+                  key={index}
+                  className={`flex flex-col gap-1 py-4 md:py-0 md:pr-6 lg:pr-8 ${
+                    index !== 0 ? "border-t md:border-t-0 md:border-l border-lma-cream/20 md:pl-6 lg:pl-8" : ""
+                  }`}
+                >
+                  <span className="font-[family-name:var(--font-anton)] text-lma-cream text-base md:text-lg tracking-tight">
+                    {stat.value}
+                  </span>
+                  <span className="text-lma-body/60 text-[9px] md:text-[10px] tracking-[0.15em] uppercase">
+                    {stat.label}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Team Block */}
-        <div className="mt-24 md:mt-32">
-          <p className="mb-4 font-sans text-xs uppercase tracking-[0.2em] text-lma-cream/60">
-            THE TEAM
-          </p>
-          <h3 className="font-[family-name:var(--font-anton)] text-3xl uppercase tracking-tight text-lma-cream md:text-4xl">
-            The operators behind the work.
-          </h3>
-
-          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index}>
-                {/* Team Member Image */}
-                <div className="flex aspect-square items-center justify-center bg-lma-cream/5">
-                  <span className="font-sans text-xs uppercase tracking-[0.2em] text-lma-cream/40">
-                    {member.label}
-                  </span>
-                </div>
-                
-                {/* Name & Role */}
-                <h4 className="mt-4 font-[family-name:var(--font-anton)] text-xl uppercase tracking-tight text-lma-cream md:text-2xl">
-                  {member.name}
-                </h4>
-                <p className="mt-1 font-sans text-xs uppercase tracking-[0.15em] text-lma-gold/70">
-                  {member.role}
-                </p>
-              </div>
-            ))}
+            {/* Text Link */}
+            <a
+              href="/about"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="group mt-8 md:mt-12 inline-flex items-center gap-2 text-lma-cream text-sm tracking-[0.1em] uppercase transition-colors duration-300 hover:text-lma-gold"
+            >
+              Read Kim&apos;s full story
+              <ArrowRight 
+                className={`w-4 h-4 transition-transform duration-300 ${
+                  isHovered ? "translate-x-1" : "translate-x-0"
+                }`}
+              />
+            </a>
           </div>
         </div>
       </div>
