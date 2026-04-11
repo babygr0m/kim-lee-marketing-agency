@@ -47,22 +47,22 @@ export function Header() {
       >
         <div className="flex items-center justify-between px-6 py-6 md:px-12">
           {/* Left - Wordmark */}
-          <a href="/" className="flex items-center gap-3 group">
-            {/* Stylized LMA — L has diagonal notch cut from top-right corner */}
+          <a href="/" className="flex items-center gap-4 group">
+            {/* Stylized LMA — tight condensed wordmark with notched L */}
             <svg
-              viewBox="0 0 90 30"
-              className="h-8 fill-lma-cream"
+              viewBox="0 0 58 24"
+              className="h-6 fill-lma-cream"
               aria-label="LMA"
             >
-              {/* L: full rect minus top-right triangle notch */}
-              <polygon points="0,0 7,0 7,7 14,0 20,0 20,30 0,30" />
-              {/* M */}
-              <polygon points="24,0 30,0 34,12 38,0 44,0 44,30 38,30 38,15 34,24 30,15 30,30 24,30" />
-              {/* A: outer shape with inner counter cutout */}
-              <path d="M54,30 L62,0 L68,0 L76,30 Z M62,20 L70,20 L66,6 Z" fillRule="evenodd" />
+              {/* L with diagonal notch cut from top-right */}
+              <polygon points="0,0 5,0 5,5 10,0 10,24 0,24" />
+              {/* M - tight against L */}
+              <polygon points="12,0 17,0 20,8 23,0 28,0 28,24 23,24 23,10 20,17 17,10 17,24 12,24" />
+              {/* A - tight against M */}
+              <path d="M31,24 L38,0 L42,0 L49,24 L44,24 L42.5,18 L37.5,18 L36,24 Z M38.5,14 L41.5,14 L40,7 Z" fillRule="evenodd" />
             </svg>
             {/* Tagline */}
-            <span className="hidden sm:block font-sans text-[9px] uppercase tracking-[0.18em] text-lma-cream/50 leading-none pt-0.5">
+            <span className="hidden sm:block font-sans text-[10px] uppercase tracking-[0.2em] text-lma-cream/50 leading-none">
               Lee Marketing Agency
             </span>
           </a>
