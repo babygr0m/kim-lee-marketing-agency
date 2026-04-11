@@ -47,11 +47,24 @@ export function Header() {
       >
         <div className="flex items-center justify-between px-6 py-6 md:px-12">
           {/* Left - Wordmark */}
-          <a
-            href="/"
-            className="font-[family-name:var(--font-anton)] text-lma-cream text-[1.75rem] tracking-tight"
-          >
-            LMA
+          <a href="/" className="flex items-center gap-3 group">
+            {/* Stylized LMA — L has diagonal notch cut from top-right corner */}
+            <svg
+              viewBox="0 0 90 30"
+              className="h-8 fill-lma-cream"
+              aria-label="LMA"
+            >
+              {/* L: full rect minus top-right triangle notch */}
+              <polygon points="0,0 7,0 7,7 14,0 20,0 20,30 0,30" />
+              {/* M */}
+              <polygon points="24,0 30,0 34,12 38,0 44,0 44,30 38,30 38,15 34,24 30,15 30,30 24,30" />
+              {/* A: outer shape with inner counter cutout */}
+              <path d="M54,30 L62,0 L68,0 L76,30 Z M62,20 L70,20 L66,6 Z" fillRule="evenodd" />
+            </svg>
+            {/* Tagline */}
+            <span className="hidden sm:block font-sans text-[9px] uppercase tracking-[0.18em] text-lma-cream/50 leading-none pt-0.5">
+              Lee Marketing Agency
+            </span>
           </a>
 
           {/* Right - Desktop Nav */}
