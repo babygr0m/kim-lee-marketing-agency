@@ -28,14 +28,7 @@ export function Hero() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 flex flex-col justify-between h-full px-6 md:px-12 lg:px-20 py-8 md:py-12">
-        {/* Top Section - Eyebrow */}
-        <header>
-          <span className="font-display text-lma-cream text-xs md:text-sm tracking-[0.2em] uppercase">
-            LMA — Lee Marketing Agency
-          </span>
-        </header>
-
+      <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 lg:px-20 pt-24 pb-8 md:pb-12">
         {/* Middle Section - Headline & CTA */}
         <div className="flex flex-col items-start max-w-5xl">
           <h1 className="font-display text-lma-cream text-[clamp(2.5rem,10vw,8rem)] leading-[0.9] tracking-[-0.02em] uppercase text-balance">
