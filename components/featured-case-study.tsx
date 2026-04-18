@@ -17,15 +17,21 @@ export function FeaturedCaseStudy() {
       <div className="max-w-7xl mx-auto">
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-          {/* Left Column - Image (60%) */}
+          {/* Left Column - Video (60%) */}
           <div className="lg:w-[60%]">
-            <div 
-              className="relative aspect-[4/5] bg-lma-black border border-lma-cream/20 flex items-center justify-center"
-              data-image-placeholder="fashion-nova-hero"
-            >
-              <span className="text-lma-cream/30 text-xs tracking-[0.15em] uppercase">
-                Fashion Nova Hero Image
-              </span>
+            <div className="relative aspect-[4/3] overflow-hidden bg-lma-black">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source 
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0417%20%281%29-7rSg6VOcU2z1Sfc7Ku5CYLrYAmAc8j.mp4" 
+                  type="video/mp4" 
+                />
+              </video>
             </div>
           </div>
 
@@ -47,9 +53,14 @@ export function FeaturedCaseStudy() {
             </p>
 
             {/* Body Copy */}
-            <p className="font-sans text-lma-body/70 text-sm md:text-base leading-relaxed mb-8 md:mb-12 max-w-md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </p>
+            <div className="font-sans text-lma-body/70 text-sm md:text-base leading-relaxed mb-8 md:mb-12 max-w-md space-y-4">
+              <p>
+                Developed Fashion Nova&apos;s Social Media Department and digital marketing infrastructure from the ground up, establishing strategy and scaling brand awareness through influencer partnerships and targeted social campaigns. Cultivated original concepts for celebrity partnerships, social media campaigns, influencer strategies, and brand placements to maximize reach and return across every digital platform.
+              </p>
+              <p>
+                Facilitated every major celebrity campaign — sourcing talent, managing negotiations and contracts, coordinating editorial shoots, and spearheading brand events and music, TV, and film placements. Grew a following of millions, generated billions of impressions, and created hundreds of viral moments that defined the brand&apos;s cultural position.
+              </p>
+            </div>
 
             {/* Stats Row */}
             <div className="flex items-center gap-0 mb-8 md:mb-12">
