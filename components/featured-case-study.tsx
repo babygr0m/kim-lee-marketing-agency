@@ -19,13 +19,13 @@ export function FeaturedCaseStudy() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Left Column - Video (60%) */}
           <div className="lg:w-[60%]">
-            <div className="relative aspect-[4/3] overflow-hidden bg-lma-black">
+            <div className="relative aspect-[4/3] overflow-hidden bg-lma-black w-full">
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute top-1/2 left-1/2 w-[134%] h-full -translate-x-1/2 -translate-y-1/2 object-cover"
               >
                 <source 
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0417%20%281%29-7rSg6VOcU2z1Sfc7Ku5CYLrYAmAc8j.mp4" 
@@ -39,7 +39,7 @@ export function FeaturedCaseStudy() {
           <div className="lg:w-[40%] flex flex-col justify-center">
             {/* Eyebrow */}
             <span className="text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 md:mb-8">
-              Featured Case Study — 01
+              Featured Case Study / 01
             </span>
 
             {/* Headline */}
@@ -58,7 +58,7 @@ export function FeaturedCaseStudy() {
                 Developed Fashion Nova&apos;s Social Media Department and digital marketing infrastructure from the ground up, establishing strategy and scaling brand awareness through influencer partnerships and targeted social campaigns. Cultivated original concepts for celebrity partnerships, social media campaigns, influencer strategies, and brand placements to maximize reach and return across every digital platform.
               </p>
               <p>
-                Facilitated every major celebrity campaign — sourcing talent, managing negotiations and contracts, coordinating editorial shoots, and spearheading brand events and music, TV, and film placements. Grew a following of millions, generated billions of impressions, and created hundreds of viral moments that defined the brand&apos;s cultural position.
+                Facilitated every major celebrity campaign: sourcing talent, managing negotiations and contracts, coordinating editorial shoots, and spearheading brand events and music, TV, and film placements. Grew a following of millions, generated billions of impressions, and created hundreds of viral moments that defined the brand&apos;s cultural position.
               </p>
             </div>
 

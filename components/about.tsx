@@ -47,10 +47,10 @@ export function About() {
             </h3>
             
             <p className="mt-6 font-sans text-base leading-relaxed text-lma-cream/80">
-              Kim Lee is the founder and CEO of LMA — a full-service digital marketing agency 
+              Kim Lee is the founder and CEO of LMA, a full-service digital marketing agency 
               specializing in social commerce and affiliate marketing. She is one of the original 
               architects of modern influencer marketing, having spent eight years at Fashion Nova 
-              building the brand&apos;s entire marketing operation from the ground up — the viral strategy 
+              building the brand&apos;s entire marketing operation from the ground up: the viral strategy 
               that turned a local boutique into one of the fastest-growing fashion brands in the 
               world, generating over $1B+ in annual revenue.
             </p>

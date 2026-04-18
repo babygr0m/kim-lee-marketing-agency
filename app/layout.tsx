@@ -22,7 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'LMA — Lee Marketing Agency',
+  title: 'LMA / Lee Marketing Agency',
   description: 'We built the internet\'s fastest-growing brands. Now we\'ll build yours.',
   generator: 'v0.app',
   icons: {
