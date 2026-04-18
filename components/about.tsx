@@ -29,12 +29,12 @@ export function About() {
         {/* Founder Block */}
         <div className="mt-16 grid gap-10 md:mt-20 md:grid-cols-2 md:gap-16">
           {/* Portrait */}
-          <div 
-            className="flex aspect-[3/4] items-center justify-center border border-lma-cream/10 bg-lma-cream/5"
-          >
-            <span className="font-sans text-xs uppercase tracking-[0.2em] text-lma-cream/40">
-              KIM LEE PORTRAIT
-            </span>
+          <div className="relative aspect-[3/4] overflow-hidden border border-lma-cream/10">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-04-17%20at%205.13.47%E2%80%AFPM-FWvU564UFJVC0celrWGwpVHHmmhf3y.png"
+              alt="Kim Lee, Founder & CEO of LMA"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
           </div>
 
           {/* Bio */}

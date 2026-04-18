@@ -15,14 +15,20 @@ export function Hero() {
 
   return (
     <section className="relative h-screen w-full bg-lma-black overflow-hidden">
-      {/* Video Placeholder with Overlay */}
+      {/* Video Background with Overlay */}
       <div className="absolute inset-0">
-        {/* VIDEO PLACEHOLDER - Replace this div's background with your video element */}
-        <div 
-          className="absolute inset-0 bg-lma-black"
-          data-video-placeholder="true"
-          aria-label="Background video placeholder"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source 
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0417%20%281%29-7rSg6VOcU2z1Sfc7Ku5CYLrYAmAc8j.mp4" 
+            type="video/mp4" 
+          />
+        </video>
         {/* Dark gradient overlay from bottom for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-lma-black via-lma-black/70 to-lma-black/30" />
       </div>
