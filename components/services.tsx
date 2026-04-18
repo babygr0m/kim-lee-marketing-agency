@@ -8,8 +8,8 @@ const services = [
   },
   {
     number: "02",
-    name: "Affiliate Marketing",
-    description: "Performance-driven affiliate programs that scale. We recruit brand-aligned ambassadors, structure tiered commission systems, and manage the full affiliate lifecycle from onboarding to reporting."
+    name: "Meta & TikTok Shop Affiliate Marketing",
+    description: "Our core specialty. We build and scale affiliate programs across Meta and TikTok Shop, the two platforms driving the highest-converting creator commerce today. From creator recruitment and commission structuring to full lifecycle management and performance reporting, we run affiliate like a growth channel, not a line item."
   },
   {
     number: "03",
