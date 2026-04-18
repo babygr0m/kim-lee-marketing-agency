@@ -15,7 +15,7 @@ const brands = [
   },
   { 
     name: "Netflix", 
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Netflix_2016_N_logo.svg-OndIG5wopguyJ8fSo2ObF3FQWsWm4l.png",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/netflix%20logo-yUgpcjcCxewFOnn4VyDJNXxkGUZrWU.png",
     needsBlendMode: false
   },
   { 
@@ -30,7 +30,7 @@ const brands = [
   },
   { 
     name: "Atlantic Records", 
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Atlantic_Records_fan_logo.svg-pyrhIKgJDt4cwOQ9tdqclhs6bqPTk8.png",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Atlantic%20Logo-Q5c9Wzrimh0JChgrIFgrq4x3et9p7t.png",
     needsBlendMode: false
   },
   { 
@@ -50,7 +50,7 @@ const brands = [
   },
   { 
     name: "Live Nation", 
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/live-nation-logo.png-RQfyNza1yOGgIdj1YGaTRPqLyfoiyc.jpeg",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Live%20nation%20logo-WvNPZEw4lpfzTU8EeQWj4Ql0Cgkd91.webp",
     needsBlendMode: true
   },
   { 
@@ -73,21 +73,20 @@ export function LogoWall() {
         Trusted by brands that moved culture
       </p>
 
-      {/* Logo Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16 max-w-6xl mx-auto">
+      {/* Logo Grid - increased gap from 8/12/16 to 10/16/20 for ~25% more breathing room */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-16 lg:gap-20 max-w-6xl mx-auto">
         {brands.map((brand) => (
           <div
             key={brand.name}
-            className="group flex items-center justify-center h-12 md:h-16 cursor-pointer transition-opacity duration-300"
+            className="flex items-center justify-center h-12 md:h-16"
           >
             <Image
               src={brand.logo}
               alt={brand.name}
               width={160}
-              height={64}
+              height={32}
               className={`
-                h-8 md:h-10 w-auto object-contain 
-                opacity-40 transition-opacity duration-300 group-hover:opacity-100
+                max-h-8 w-auto object-contain 
                 ${brand.needsBlendMode ? "mix-blend-screen" : ""}
               `}
               style={{
