@@ -17,15 +17,15 @@ export function FeaturedCaseStudy() {
       <div className="max-w-7xl mx-auto">
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-          {/* Left Column - Video (60%) */}
-          <div className="lg:w-[60%]">
-            <div className="relative aspect-[4/3] overflow-hidden bg-lma-black w-full">
+          {/* Left Column - Video (55%) */}
+          <div className="lg:w-[55%]">
+            <div className="relative aspect-[3/4] overflow-hidden">
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute top-1/2 left-1/2 w-[134%] h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               >
                 <source 
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0417%20%281%29-7rSg6VOcU2z1Sfc7Ku5CYLrYAmAc8j.mp4" 
@@ -35,8 +35,8 @@ export function FeaturedCaseStudy() {
             </div>
           </div>
 
-          {/* Right Column - Content (40%) */}
-          <div className="lg:w-[40%] flex flex-col justify-center">
+          {/* Right Column - Content (45%) */}
+          <div className="lg:w-[45%] flex flex-col justify-center">
             {/* Eyebrow */}
             <span className="text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 md:mb-8">
               Featured Case Study / 01
