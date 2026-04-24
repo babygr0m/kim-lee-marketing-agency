@@ -1,19 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { ArrowRight, Menu, X } from "lucide-react"
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Case Studies", href: "#case-studies" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/#case-studies" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCtaHovered, setIsCtaHovered] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,15 +61,20 @@ export function Header() {
           {/* Right - Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex items-center gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="font-sans text-xs uppercase tracking-[0.15em] text-lma-cream/80 transition-colors duration-200 hover:text-lma-gold"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className={`font-sans text-xs uppercase tracking-[0.15em] transition-colors duration-200 hover:text-lma-gold ${
+                      isActive ? "text-lma-gold" : "text-lma-cream/80"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
             </nav>
 
             {/* Divider */}
@@ -75,7 +82,7 @@ export function Header() {
 
             {/* CTA Button */}
             <a
-              href="#contact"
+              href="/#contact"
               onMouseEnter={() => setIsCtaHovered(true)}
               onMouseLeave={() => setIsCtaHovered(false)}
               className="group flex items-center gap-2 border border-lma-cream/60 px-5 py-2.5 font-sans text-xs uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
@@ -114,21 +121,26 @@ export function Header() {
 
           {/* Nav Links */}
           <nav className="flex flex-col items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-[family-name:var(--font-anton)] text-lma-cream text-3xl uppercase tracking-tight transition-colors duration-200 hover:text-lma-gold"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-[family-name:var(--font-anton)] text-3xl uppercase tracking-tight transition-colors duration-200 hover:text-lma-gold ${
+                    isActive ? "text-lma-gold" : "text-lma-cream"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
           </nav>
 
           {/* CTA Button */}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setIsMobileMenuOpen(false)}
             className="mt-12 flex items-center gap-3 border border-lma-cream/60 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
           >
