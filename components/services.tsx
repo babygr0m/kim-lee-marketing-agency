@@ -79,34 +79,38 @@ export function Services() {
               key={service.number}
               href={`/services#${service.slug}`}
               aria-label={`Learn more about ${service.name}`}
-              className="group relative flex flex-col md:flex-row md:items-start py-12 md:py-14 border-t border-lma-cream/15 last:border-b cursor-pointer transition-colors duration-300 hover:bg-lma-cream/[0.03]"
+              className="group relative flex flex-col md:flex-row md:items-center py-12 md:py-14 border-t border-lma-cream/15 last:border-b cursor-pointer transition-colors duration-300 hover:bg-lma-cream/[0.03]"
             >
               {/* Number */}
-              <div className="md:w-[15%] mb-4 md:mb-0">
+              <div className="md:w-[10%] mb-4 md:mb-0">
                 <span className="font-[family-name:var(--font-anton)] text-3xl md:text-4xl text-lma-gold">
                   {service.number}
                 </span>
               </div>
 
               {/* Service Name */}
-              <div className="md:w-[35%] mb-4 md:mb-0 md:pr-8">
+              <div className="md:w-[32%] mb-4 md:mb-0 md:pr-8">
                 <h3 className="font-[family-name:var(--font-anton)] text-2xl md:text-[2.5rem] md:leading-tight text-lma-cream uppercase tracking-tight transition-colors duration-300 group-hover:text-lma-gold">
                   {service.name}
                 </h3>
               </div>
 
               {/* Description */}
-              <div className="md:w-[50%] md:pr-12">
+              <div className="md:w-[43%] md:pr-8 mb-6 md:mb-0">
                 <p className="font-sans text-base text-lma-cream/80 leading-relaxed">
                   {service.description}
                 </p>
               </div>
 
-              {/* Hover Arrow */}
-              <ArrowRight
-                aria-hidden="true"
-                className="absolute right-0 top-12 md:top-1/2 md:-translate-y-1/2 h-5 w-5 text-lma-gold opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
-              />
+              {/* Explore CTA — persistent, clearly clickable */}
+              <div className="md:w-[15%] flex items-center justify-start md:justify-end gap-3 pr-2 md:pr-4">
+                <span className="font-sans text-xs tracking-[0.2em] uppercase text-lma-cream/60 transition-colors duration-300 group-hover:text-lma-gold">
+                  Explore
+                </span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-lma-cream/30 text-lma-cream transition-all duration-300 group-hover:border-lma-gold group-hover:bg-lma-gold group-hover:text-lma-black group-hover:translate-x-1">
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
