@@ -1,5 +1,13 @@
 import Image from "next/image"
 
+// CSS keyframes for the infinite scroll animation
+const scrollKeyframes = `
+  @keyframes logo-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+`
+
 const brands = [
   {
     name: "Fashion Nova",
@@ -69,6 +77,8 @@ const loopBrands = [...brands, ...brands]
 export function LogoWall() {
   return (
     <section className="bg-lma-black py-24 md:py-32 lg:py-40">
+      {/* Inject keyframes directly to guarantee they're available */}
+      <style dangerouslySetInnerHTML={{ __html: scrollKeyframes }} />
       {/* Eyebrow */}
       <p className="text-center text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-16 md:mb-20 px-6">
         Trusted by brands that moved culture
