@@ -84,7 +84,10 @@ export function LogoWall() {
             "linear-gradient(to right, transparent 0, #0A0A0A 80px, #0A0A0A calc(100% - 80px), transparent 100%)",
         }}
       >
-        <div className="flex w-max animate-logo-scroll">
+        <div
+          className="flex w-max hover:[animation-play-state:paused]"
+          style={{ animation: "logo-scroll 50s linear infinite" }}
+        >
           {loopBrands.map((brand, index) => (
             <div
               key={`${brand.name}-${index}`}
