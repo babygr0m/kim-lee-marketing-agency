@@ -15,7 +15,7 @@ type ServiceTabData = ServiceSectionData & { shortLabel: string }
 const services: ServiceTabData[] = [
   {
     number: "01",
-    slug: "tiktok-shop-management",
+    slug: "tiktok-shop",
     shortLabel: "TikTok Shop",
     name: "TikTok Shop Management",
     kicker: "Verified partner. Full lifecycle.",
@@ -29,7 +29,7 @@ const services: ServiceTabData[] = [
   },
   {
     number: "02",
-    slug: "meta-tiktok-affiliate",
+    slug: "affiliate-marketing",
     shortLabel: "Affiliate Marketing",
     name: "Meta & TikTok Shop Affiliate Marketing",
     kicker: "Our core specialty.",
@@ -43,7 +43,7 @@ const services: ServiceTabData[] = [
   },
   {
     number: "03",
-    slug: "influencer-marketing",
+    slug: "influencer",
     shortLabel: "Influencer",
     name: "Influencer Marketing",
     kicker: "Micro to A-list.",
@@ -71,7 +71,7 @@ const services: ServiceTabData[] = [
   },
   {
     number: "05",
-    slug: "creative-production",
+    slug: "creative",
     shortLabel: "Creative",
     name: "Creative & Campaign Production",
     kicker: "Built to stop the scroll.",
@@ -85,7 +85,7 @@ const services: ServiceTabData[] = [
   },
   {
     number: "06",
-    slug: "social-media-management",
+    slug: "social-media",
     shortLabel: "Social Media",
     name: "Content Creation & Social Media Management",
     kicker: "End-to-end social presence.",
@@ -99,7 +99,7 @@ const services: ServiceTabData[] = [
   },
   {
     number: "07",
-    slug: "podcast-production",
+    slug: "podcast",
     shortLabel: "Podcast",
     name: "Podcast Production & Management",
     kicker: "A full brand channel.",

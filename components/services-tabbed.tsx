@@ -14,6 +14,22 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
 
   const active = services[activeIndex]
 
+  // Read URL hash on mount and select matching tab
+  useEffect(() => {
+    const selectFromHash = () => {
+      const hash = window.location.hash.replace("#", "")
+      if (!hash) return
+      const matchIndex = services.findIndex((s) => s.slug === hash)
+      if (matchIndex !== -1) {
+        setActiveIndex(matchIndex)
+      }
+    }
+
+    selectFromHash()
+    window.addEventListener("hashchange", selectFromHash)
+    return () => window.removeEventListener("hashchange", selectFromHash)
+  }, [services])
+
   // Auto-scroll active tab into view
   useEffect(() => {
     if (activeTabRef.current) {
