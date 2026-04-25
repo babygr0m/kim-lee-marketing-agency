@@ -57,13 +57,6 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
     }
   }
 
-  const scrollTabs = (direction: "left" | "right") => {
-    if (tabsRef.current) {
-      const amount = direction === "left" ? -200 : 200
-      tabsRef.current.scrollBy({ left: amount, behavior: "smooth" })
-    }
-  }
-
   const goToPrev = () => setTab(activeIndex > 0 ? activeIndex - 1 : caseStudies.length - 1)
   const goToNext = () => setTab(activeIndex < caseStudies.length - 1 ? activeIndex + 1 : 0)
 
@@ -90,8 +83,8 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
       {/* Tab Navigation */}
       <div className="relative border-b border-lma-cream/10 mb-10 md:mb-14">
         <button
-          onClick={() => scrollTabs("left")}
-          aria-label="Scroll tabs left"
+          onClick={goToPrev}
+          aria-label="Previous case study"
           className="absolute left-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-r from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -109,22 +102,29 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                 key={cs.slug}
                 ref={isActive ? activeTabRef : null}
                 onClick={() => setTab(index)}
-                className={`relative flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
-                  isActive ? "text-lma-gold" : "text-lma-cream/60 hover:text-lma-cream"
+                className={`flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
+                  isActive
+                    ? "text-lma-cream"
+                    : "text-lma-cream/60 hover:text-lma-cream/80"
                 }`}
               >
-                {cs.shortLabel}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-lma-gold" />
-                )}
+                <span className="relative inline-block px-1 pb-2">
+                  {cs.shortLabel}
+                  {isActive && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-lma-gold"
+                    />
+                  )}
+                </span>
               </button>
             )
           })}
         </div>
 
         <button
-          onClick={() => scrollTabs("right")}
-          aria-label="Scroll tabs right"
+          onClick={goToNext}
+          aria-label="Next case study"
           className="absolute right-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-l from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
