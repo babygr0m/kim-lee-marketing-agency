@@ -26,6 +26,12 @@ export type CaseStudyThumbnail = {
   secondaryLabel: string
   /** Optional direct URL — skips the maxres → hqdefault fallback. */
   directSrc?: string
+  /**
+   * When provided, the thumbnail renders as a plain <img> anchor using this
+   * local/static image path instead of routing through YouTubeThumbnail.
+   * Used for case studies whose press imagery isn't sourced from YouTube.
+   */
+  imageSrc?: string
 }
 
 export type CaseStudyArchiveLink = {
@@ -297,17 +303,42 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         {/* Thumbnail Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-12 md:mb-16">
           {active.thumbnails && active.thumbnails.length > 0
-            ? active.thumbnails.map((thumb) => (
-                <YouTubeThumbnail
-                  key={thumb.videoId}
-                  videoId={thumb.videoId}
-                  href={thumb.href}
-                  alt={thumb.alt}
-                  primaryLabel={thumb.primaryLabel}
-                  secondaryLabel={thumb.secondaryLabel}
-                  directSrc={thumb.directSrc}
-                />
-              ))
+            ? active.thumbnails.map((thumb) =>
+                thumb.imageSrc ? (
+                  <a
+                    key={thumb.videoId}
+                    href={thumb.href}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={thumb.alt}
+                    className="group block transition-transform duration-200 ease-out hover:scale-[1.02]"
+                  >
+                    <div className="relative aspect-video overflow-hidden border border-lma-cream/10 transition-colors duration-200 ease-out group-hover:border-lma-gold">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={thumb.imageSrc || "/placeholder.svg"}
+                        alt={thumb.alt}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
+                      />
+                    </div>
+                    <p className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase">
+                      <span className="text-lma-gold">{thumb.primaryLabel}</span>
+                      <span className="text-lma-cream/60"> / {thumb.secondaryLabel}</span>
+                    </p>
+                  </a>
+                ) : (
+                  <YouTubeThumbnail
+                    key={thumb.videoId}
+                    videoId={thumb.videoId}
+                    href={thumb.href}
+                    alt={thumb.alt}
+                    primaryLabel={thumb.primaryLabel}
+                    secondaryLabel={thumb.secondaryLabel}
+                    directSrc={thumb.directSrc}
+                  />
+                ),
+              )
             : [1, 2, 3, 4].map((n) => (
                 <div
                   key={n}
