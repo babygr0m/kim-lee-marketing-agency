@@ -38,6 +38,12 @@ export type CaseStudyThumbnail = {
   objectFit?: "cover" | "contain"
   /** Defaults to "center". Pass e.g. "top" to bias the crop. */
   objectPosition?: string
+  /**
+   * Tailwind aspect class applied to the thumbnail frame. Defaults to
+   * "aspect-video" (16:9). Use "aspect-[3/4]" for portrait stills so the
+   * frame matches the image instead of letterboxing it.
+   */
+  aspectClass?: string
 }
 
 export type CaseStudyArchiveLink = {
@@ -227,22 +233,15 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
           {active.featuredEmbed ? (
             active.featuredEmbed.poster ? (
-              <div
-                className="relative block w-full overflow-hidden border border-lma-cream/10 bg-lma-black"
-                style={{ aspectRatio: "16 / 9" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={active.featuredEmbed.poster.thumbnailSrc || "/placeholder.svg"}
-                  alt={active.featuredEmbed.title}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full"
-                  style={{
-                    objectFit: active.featuredEmbed.poster.objectFit ?? "cover",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
+              // Static press still — no forced aspect, no border, no bg.
+              // Renders at the image's natural ratio, scaled to column width.
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={active.featuredEmbed.poster.thumbnailSrc || "/placeholder.svg"}
+                alt={active.featuredEmbed.title}
+                loading="lazy"
+                className="w-full h-auto block"
+              />
             ) : (
               <div
                 className="relative w-full overflow-hidden border border-lma-cream/10"
@@ -282,7 +281,11 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
             ? active.thumbnails.map((thumb) =>
                 thumb.imageSrc ? (
                   <div key={thumb.videoId} className="block">
-                    <div className="relative aspect-video overflow-hidden border border-lma-cream/10 bg-lma-black">
+                    <div
+                      className={`relative ${
+                        thumb.aspectClass ?? "aspect-video"
+                      } overflow-hidden`}
+                    >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={thumb.imageSrc || "/placeholder.svg"}

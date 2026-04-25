@@ -86,15 +86,17 @@ const caseStudies: CaseStudyData[] = [
     ],
     featuredEmbed: {
       // Rendered as a static press still (display-only, non-clickable).
+      // No forced aspect ratio — image renders at its natural size, full
+      // column width, no surrounding container chrome.
       src: "https://www.youtube.com/watch?v=9N7WbMjozUk",
       title: "Forever 21 x Rolling Loud 2023",
       poster: {
         thumbnailSrc: "/case-studies/f21-rolling-loud-featured.jpg",
         watchHref: "https://www.youtube.com/watch?v=9N7WbMjozUk",
-        // Show the entire heart-frame portrait without cropping.
-        objectFit: "contain",
       },
     },
+    // Thumbnail order alternates portrait / landscape for visual rhythm:
+    // Alix (portrait) → Kimora (landscape) → Madison (portrait) → XO Kitty (landscape).
     thumbnails: [
       {
         videoId: "EicIufb-VxE",
@@ -103,18 +105,9 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Alix Earle",
         secondaryLabel: "Juicy Couture",
         imageSrc: "/case-studies/f21-alix-earle.webp",
-        // Portrait still — letterbox so face + Juicy bag are both visible.
-        objectFit: "contain",
-      },
-      {
-        videoId: "bevSPXctLNA",
-        href: "https://www.youtube.com/watch?v=bevSPXctLNA",
-        alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
-        primaryLabel: "Madison Beer",
-        secondaryLabel: "Holiday",
-        imageSrc: "/case-studies/f21-madison-beer.jpg",
-        // Portrait still — letterbox so her face is in frame, not just dress.
-        objectFit: "contain",
+        // Portrait frame — fills naturally without letterbox bars.
+        aspectClass: "aspect-[3/4]",
+        objectPosition: "center top",
       },
       {
         videoId: "SWuz2CRqoZ8",
@@ -123,6 +116,17 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Kimora",
         secondaryLabel: "Baby Phat",
         imageSrc: "/case-studies/f21-kimora.jpeg",
+      },
+      {
+        videoId: "bevSPXctLNA",
+        href: "https://www.youtube.com/watch?v=bevSPXctLNA",
+        alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
+        primaryLabel: "Madison Beer",
+        secondaryLabel: "Holiday",
+        imageSrc: "/case-studies/f21-madison-beer.jpg",
+        // Portrait frame — keeps face + corset both in view.
+        aspectClass: "aspect-[3/4]",
+        objectPosition: "center top",
       },
       {
         videoId: "C6t9M6IUO-c",
