@@ -111,6 +111,16 @@ const caseStudies: CaseStudyData[] = [
         objectPosition: "center top",
       },
       {
+        videoId: "bevSPXctLNA",
+        href: "https://www.youtube.com/watch?v=bevSPXctLNA",
+        alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
+        primaryLabel: "Madison Beer",
+        secondaryLabel: "Holiday",
+        imageSrc: "/case-studies/f21-madison-beer.jpg",
+        aspectClass: "aspect-[3/4]",
+        objectPosition: "center top",
+      },
+      {
         videoId: "SWuz2CRqoZ8",
         href: "https://www.youtube.com/watch?v=SWuz2CRqoZ8",
         alt: "Kimora Lee Simmons walking the Baby Phat runway with her daughters",
@@ -121,16 +131,6 @@ const caseStudies: CaseStudyData[] = [
         // Subjects (Kimora + her daughters) sit center-bottom of the original
         // — bias the crop downward so all three stay in the portrait frame.
         objectPosition: "center bottom",
-      },
-      {
-        videoId: "bevSPXctLNA",
-        href: "https://www.youtube.com/watch?v=bevSPXctLNA",
-        alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
-        primaryLabel: "Madison Beer",
-        secondaryLabel: "Holiday",
-        imageSrc: "/case-studies/f21-madison-beer.jpg",
-        aspectClass: "aspect-[3/4]",
-        objectPosition: "center top",
       },
       {
         videoId: "C6t9M6IUO-c",
