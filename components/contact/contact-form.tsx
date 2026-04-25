@@ -356,18 +356,17 @@ export function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
           />
         </div>
 
-        {/* Submit */}
+        {/* Next — advances to the booking step */}
         <button
           type="submit"
           className="group flex w-full items-center justify-center gap-3 border border-lma-cream bg-transparent text-lma-cream font-mono text-xs uppercase tracking-[0.2em] py-[18px] hover:bg-lma-cream hover:text-lma-black transition-colors"
         >
-          Send message
+          Next: Book your call
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
 
         <p className="text-center font-sans text-xs md:text-sm text-lma-cream/60 leading-relaxed">
-          We respond to every inquiry within 48 hours. All information stays
-          confidential.
+          Step 1 of 2. After this we&apos;ll lock in 30 minutes with Kim on the calendar.
         </p>
       </form>
     </>
