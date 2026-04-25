@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { AnimatedStat } from "@/components/animated-stat"
 
 const caseStudyStats = [
   { value: "$1B+", label: "Revenue" },
@@ -79,9 +80,10 @@ export function FeaturedCaseStudy() {
                     index !== 0 ? "pl-6 md:pl-8 border-l border-lma-cream/20" : ""
                   }`}
                 >
-                  <span className="font-display text-lma-cream text-base md:text-lg tracking-tight">
-                    {stat.value}
-                  </span>
+                  <AnimatedStat
+                    value={stat.value}
+                    className="font-display text-lma-cream text-base md:text-lg tracking-tight"
+                  />
                   <span className="text-lma-body/60 text-[9px] md:text-[10px] tracking-[0.15em] uppercase">
                     {stat.label}
                   </span>

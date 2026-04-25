@@ -192,3 +192,148 @@
 .animate-service-conic-rotate {
   animation: service-conic-rotate 28s linear infinite;
 }
+
+/* ---------------------------------------------------------------------------
+ * Case studies — per-tab ambient gradient identities.
+ *
+ * Each of the 4 case study tabs gets a distinct brand-color wash applied as
+ * a full-bleed background to the active case study content section. All four
+ * are stacked in <CaseStudyTabBg> with opacity: 0 and the active tab fades
+ * to opacity: 1 over 600ms, so brand color identities cross-fade smoothly
+ * instead of cutting hard. Opacities stay 5–10% so text remains fully
+ * legible at every animation phase. Pure CSS — background-position drift
+ * only; no JS, no canvas.
+ * ------------------------------------------------------------------------- */
+
+/* Fashion Nova — radial pink-to-deep-red drift, 22s. */
+@keyframes cs-fashion-nova-drift {
+  0%, 100% { background-position: 0% 0%; }
+  25%      { background-position: 100% 0%; }
+  50%      { background-position: 100% 100%; }
+  75%      { background-position: 0% 100%; }
+}
+.animate-cs-fashion-nova {
+  animation: cs-fashion-nova-drift 22s ease-in-out infinite;
+}
+
+/* Forever 21 — diagonal yellow band sweeps 135°, 16s. */
+@keyframes cs-forever-21-sweep {
+  0%, 100% { background-position: 0% 0%; }
+  50%      { background-position: 100% 100%; }
+}
+.animate-cs-forever-21 {
+  animation: cs-forever-21-sweep 16s ease-in-out infinite;
+}
+
+/* Ivy City Co — champagne-cream radial drift, 20s. */
+@keyframes cs-ivy-city-drift {
+  0%, 100% { background-position: 0% 0%; }
+  25%      { background-position: 100% 0%; }
+  50%      { background-position: 100% 100%; }
+  75%      { background-position: 0% 100%; }
+}
+.animate-cs-ivy-city {
+  animation: cs-ivy-city-drift 20s ease-in-out infinite;
+}
+
+/* Sol de Janeiro — tropical orange→coral→green diagonal sweep at 110°, 18s. */
+@keyframes cs-sol-de-janeiro-sweep {
+  0%, 100% { background-position: 0% 0%; }
+  50%      { background-position: 100% 100%; }
+}
+.animate-cs-sol-de-janeiro {
+  animation: cs-sol-de-janeiro-sweep 18s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * Hero text reveal stagger — fires on first mount of every page hero.
+ *
+ * Pure CSS keyframes triggered by class names that exist in the SSR HTML, so
+ * the animation runs as soon as the DOM is mounted without blocking first
+ * paint. 5 stagger slots map to eyebrow / headline / kicker / body / CTA.
+ *
+ * Total reveal completes ~950ms after first paint (550ms delay + 400ms
+ * duration on the CTA — the slowest slot).
+ * ------------------------------------------------------------------------- */
+
+/* Two rise distances — 12px for the headline, 8px for everything else. */
+@keyframes lma-rise-8 {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes lma-rise-12 {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lma-reveal-eyebrow,
+.lma-reveal-headline,
+.lma-reveal-kicker,
+.lma-reveal-body,
+.lma-reveal-cta {
+  /* Hold the from-state until the animation begins so there's no flash of
+     fully-opaque content before the keyframes kick in. */
+  opacity: 0;
+}
+
+.lma-reveal-eyebrow  { animation: lma-rise-8  400ms ease-out   0ms forwards; }
+.lma-reveal-headline { animation: lma-rise-12 600ms ease-out 100ms forwards; }
+.lma-reveal-kicker   { animation: lma-rise-8  500ms ease-out 250ms forwards; }
+.lma-reveal-body     { animation: lma-rise-8  400ms ease-out 400ms forwards; }
+.lma-reveal-cta      { animation: lma-rise-8  400ms ease-out 550ms forwards; }
+
+/* ---------------------------------------------------------------------------
+ * Tab content swap transition — used on /case-studies AND /services.
+ *
+ * The active tab content div is keyed on the active index, so React unmounts
+ * the previous content and mounts the new content. The new mount runs a
+ * 250ms ease-out fade + translateY(4px → 0) animation with a 50ms delay,
+ * giving a brief gap between the old content disappearing and the new
+ * content appearing. `both` fill mode pins the from-state during the delay.
+ * ------------------------------------------------------------------------- */
+@keyframes lma-tab-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.lma-tab-enter {
+  animation: lma-tab-enter 250ms ease-out 50ms both;
+}
+
+/* ---------------------------------------------------------------------------
+ * prefers-reduced-motion — accessibility opt-out.
+ *
+ * For users who set their OS preference, all decorative motion is disabled
+ * (ambient gradients render statically at their initial frame, hero stagger
+ * resolves to final state immediately, tab swap animations are removed).
+ * Stat count-ups are JS-driven and gated separately in <AnimatedStat>.
+ * Subtle hover interactions are user-initiated and stay enabled.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Ambient gradient motion — services + case studies. */
+  .animate-service-radial-drift,
+  .animate-service-linear-shift,
+  .animate-service-conic-rotate,
+  .animate-cs-fashion-nova,
+  .animate-cs-forever-21,
+  .animate-cs-ivy-city,
+  .animate-cs-sol-de-janeiro,
+  .animate-logo-scroll {
+    animation: none !important;
+  }
+
+  /* Hero stagger reveals — render at final state immediately. */
+  .lma-reveal-eyebrow,
+  .lma-reveal-headline,
+  .lma-reveal-kicker,
+  .lma-reveal-body,
+  .lma-reveal-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  /* Tab swap — instant. */
+  .lma-tab-enter {
+    animation: none !important;
+  }
+}

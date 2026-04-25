@@ -1,3 +1,5 @@
+import { AnimatedStat } from "@/components/animated-stat"
+
 const founderStats = [
   { value: "$1B+", label: "Revenue built at Fashion Nova" },
   { value: "100M+", label: "Combined reach across clients" },
@@ -70,9 +72,10 @@ export function AboutFounder() {
                 index !== founderStats.length - 1 ? "md:pr-8 lg:pr-12" : ""
               }`}
             >
-              <span className="font-[family-name:var(--font-anton)] text-3xl uppercase tracking-tight text-lma-cream md:text-4xl lg:text-5xl">
-                {stat.value}
-              </span>
+              <AnimatedStat
+                value={stat.value}
+                className="font-[family-name:var(--font-anton)] text-3xl uppercase tracking-tight text-lma-cream md:text-4xl lg:text-5xl"
+              />
               <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-lma-cream/60 md:text-xs">
                 {stat.label}
               </span>

@@ -88,10 +88,21 @@ export function Services() {
                 </span>
               </div>
 
-              {/* Service Name */}
+              {/* Service Name — wraps the title in a relative inline-block
+                  so the underline can absolute-position itself directly
+                  beneath the text. Line draws 0 → 100% width over 300ms on
+                  hover via `group-hover:duration-300`, retracts back at the
+                  base 200ms duration on unhover. Sits 4px below the title.
+                  Only on the homepage service rows (NOT on /services). */}
               <div className="md:w-[32%] mb-4 md:mb-0 md:pr-8">
                 <h3 className="font-[family-name:var(--font-anton)] text-2xl md:text-[2.5rem] md:leading-tight text-lma-cream uppercase tracking-tight transition-colors duration-300 group-hover:text-lma-gold">
-                  {service.name}
+                  <span className="relative inline-block">
+                    {service.name}
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-0 top-[calc(100%+4px)] block h-px w-0 bg-lma-gold transition-[width] duration-200 ease-out group-hover:w-full group-hover:duration-300"
+                    />
+                  </span>
                 </h3>
               </div>
 

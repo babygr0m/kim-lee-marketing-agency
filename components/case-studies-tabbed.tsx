@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { YouTubeThumbnail } from "@/components/youtube-thumbnail"
+import { CaseStudyTabBg } from "@/components/case-study-tab-bg"
+import { AnimatedStat } from "@/components/animated-stat"
 
 export type CaseStudyEmbed = {
   src: string
@@ -71,15 +73,39 @@ export type CaseStudyData = {
   ctaHref?: string
 }
 
+// Smooth tab swap timings, kept in sync with the .lma-tab-enter keyframes
+// in globals.css so the JS state machine and the CSS reveal stay aligned.
+const EXIT_MS = 200
+const ENTER_DELAY_MS = 50
+const ENTER_DURATION_MS = 250
+
 export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[] }) {
+  // The user-visible "selected tab" — drives the tab strip styling and the
+  // ambient gradient (which cross-fades on its own via CSS opacity, no key
+  // re-mount needed).
   const [activeIndex, setActiveIndex] = useState(0)
+
+  // The currently-rendered case study content. Lags behind activeIndex by
+  // EXIT_MS during a transition so we can run a fade-out on the old content
+  // before unmounting it.
+  const [displayIndex, setDisplayIndex] = useState(0)
+
+  // Tab swap phase machine: idle → exiting → entering → idle.
+  // - exiting: old content stays mounted, fades opacity 1→0 over EXIT_MS
+  // - entering: new content mounted via key change, .lma-tab-enter runs
+  const [phase, setPhase] = useState<"idle" | "exiting" | "entering">("idle")
+
   const [isCtaHovered, setIsCtaHovered] = useState(false)
   const tabsRef = useRef<HTMLDivElement>(null)
   const activeTabRef = useRef<HTMLButtonElement>(null)
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const enterTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const active = caseStudies[activeIndex]
+  const active = caseStudies[displayIndex]
 
-  // Read URL hash on mount, select matching tab, listen for hash changes
+  // Read URL hash on mount, select matching tab, listen for hash changes.
+  // Hash sync drives `activeIndex` only — the displayIndex catches up via
+  // the transition effect below.
   useEffect(() => {
     const selectFromHash = () => {
       const hash = window.location.hash.replace("#", "")
@@ -95,7 +121,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
     return () => window.removeEventListener("hashchange", selectFromHash)
   }, [caseStudies])
 
-  // Auto-scroll active tab into view
+  // Auto-scroll active tab into view inside the horizontal tab strip.
   useEffect(() => {
     if (activeTabRef.current) {
       activeTabRef.current.scrollIntoView({
@@ -105,6 +131,31 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
       })
     }
   }, [activeIndex])
+
+  // Drive the tab swap state machine. Whenever activeIndex diverges from
+  // displayIndex, run exit on current content, then swap content, then run
+  // enter. Cleanup any in-flight transition timers on re-trigger or unmount.
+  useEffect(() => {
+    if (activeIndex === displayIndex) return
+
+    if (exitTimer.current) clearTimeout(exitTimer.current)
+    if (enterTimer.current) clearTimeout(enterTimer.current)
+
+    setPhase("exiting")
+    exitTimer.current = setTimeout(() => {
+      setDisplayIndex(activeIndex)
+      setPhase("entering")
+      enterTimer.current = setTimeout(
+        () => setPhase("idle"),
+        ENTER_DELAY_MS + ENTER_DURATION_MS,
+      )
+    }, EXIT_MS)
+
+    return () => {
+      if (exitTimer.current) clearTimeout(exitTimer.current)
+      if (enterTimer.current) clearTimeout(enterTimer.current)
+    }
+  }, [activeIndex, displayIndex])
 
   // Update hash when tab changes
   const setTab = (i: number) => {
@@ -119,18 +170,18 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
   return (
     <section className="bg-lma-black pt-24 md:pt-28">
-      {/* Hero */}
+      {/* Hero — stagger reveal on first paint via lma-reveal-* classes. */}
       <div className="px-6 md:px-12 lg:px-20 pt-12 md:pt-16 pb-10 md:pb-14 max-w-6xl mx-auto text-center">
-        <p className="font-sans text-[10px] md:text-xs tracking-[0.25em] uppercase text-lma-gold font-semibold mb-5">
+        <p className="lma-reveal-eyebrow font-sans text-[10px] md:text-xs tracking-[0.25em] uppercase text-lma-gold font-semibold mb-5">
           Our Work
         </p>
-        <h1 className="font-[family-name:var(--font-anton)] text-lma-cream uppercase tracking-tight leading-[0.95] text-[clamp(2.75rem,7vw,6rem)] text-balance mb-5">
+        <h1 className="lma-reveal-headline font-[family-name:var(--font-anton)] text-lma-cream uppercase tracking-tight leading-[0.95] text-[clamp(2.75rem,7vw,6rem)] text-balance mb-5">
           Built from zero.
         </h1>
-        <p className="font-serif italic text-lma-gold text-xl md:text-2xl mb-6">
+        <p className="lma-reveal-kicker font-serif italic text-lma-gold text-xl md:text-2xl mb-6">
           Proven at scale.
         </p>
-        <p className="font-sans text-lma-cream/75 text-sm md:text-base leading-relaxed max-w-[680px] mx-auto">
+        <p className="lma-reveal-body font-sans text-lma-cream/75 text-sm md:text-base leading-relaxed max-w-[680px] mx-auto">
           A decade of building the digital marketing engine behind some of the
           internet&apos;s fastest-growing brands. These are the campaigns,
           collaborations, and category-defining moments that made the playbook.
@@ -138,7 +189,8 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
       </div>
 
       {/* Tab Navigation — wrapped in max-w-4xl so the prev/next arrows sit
-          right beside the centered tab row instead of at the page edges. */}
+          right beside the centered tab row instead of at the page edges.
+          Tab strip itself stays clean — no gradient applied behind it. */}
       <div className="border-b border-lma-cream/10 mb-10 md:mb-14">
         <div className="relative max-w-4xl mx-auto">
           <button
@@ -191,8 +243,29 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         </div>
       </div>
 
-      {/* Active Case Study */}
-      <div className="px-6 md:px-12 lg:px-20 pb-16 md:pb-20 max-w-7xl mx-auto">
+      {/* Active Case Study — full-bleed gradient wrapper.
+          The gradient layer is rendered here (full section width) and
+          continuously cross-fades between brand identities via CaseStudyTabBg.
+          Inner content is keyed on displayIndex so it unmounts/re-mounts
+          on swap, triggering the lma-tab-enter reveal. The exit fade is
+          driven by phase="exiting" → opacity 0 + translateY(-4px). */}
+      <div className="relative">
+        <CaseStudyTabBg activeSlug={caseStudies[activeIndex].slug} />
+
+        <div
+          key={displayIndex}
+          className={`relative z-10 px-6 md:px-12 lg:px-20 pb-16 md:pb-20 max-w-7xl mx-auto ${
+            phase === "entering" ? "lma-tab-enter" : ""
+          }`}
+          style={{
+            opacity: phase === "exiting" ? 0 : undefined,
+            transform: phase === "exiting" ? "translateY(-4px)" : undefined,
+            transition:
+              phase === "exiting"
+                ? `opacity ${EXIT_MS}ms ease-in, transform ${EXIT_MS}ms ease-in`
+                : undefined,
+          }}
+        >
         {/* Top Block — eyebrow + headline + kicker */}
         <div className="mb-10 md:mb-14">
           <p className="font-sans text-[10px] md:text-xs tracking-[0.2em] uppercase text-lma-gold font-semibold mb-4 md:mb-5">
@@ -206,7 +279,10 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           </p>
         </div>
 
-        {/* Hero Metrics Row */}
+        {/* Hero Metrics Row — values animate via <AnimatedStat>: numeric
+            stats count up from 0 → target on entry; non-numeric stats
+            (e.g. "VERIFIED", "Active", "GMV", "Full") fade in with the
+            same translateY(8 → 0) treatment. */}
         <div className="flex flex-col md:flex-row md:items-stretch border-y border-lma-cream/10 mb-12 md:mb-16">
           {active.metrics.map((stat, index) => (
             <div
@@ -217,9 +293,10 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                   : ""
               }`}
             >
-              <span className="font-[family-name:var(--font-anton)] text-lma-gold text-3xl md:text-5xl tracking-tight leading-none">
-                {stat.value}
-              </span>
+              <AnimatedStat
+                value={stat.value}
+                className="font-[family-name:var(--font-anton)] text-lma-gold text-3xl md:text-5xl tracking-tight leading-none"
+              />
               <span className="font-sans text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase">
                 {stat.label}
               </span>
@@ -294,7 +371,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center px-6">
                   <span className="font-[family-name:var(--font-anton)] text-lma-cream/10 text-7xl md:text-9xl tracking-tight block leading-none">
-                    {String(activeIndex + 1).padStart(2, "0")}
+                    {String(displayIndex + 1).padStart(2, "0")}
                   </span>
                   <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-lma-cream/30 mt-3 block">
                     {active.shortLabel}-Featured
@@ -306,7 +383,9 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         </div>
 
         {/* Thumbnail Row — when only 2 thumbs, use a centered 2-up grid at a
-            narrower max width so they don't stretch awkwardly across the row. */}
+            narrower max width so they don't stretch awkwardly across the row.
+            Each thumbnail is a `group` so the image, vignette overlay, border,
+            and gold caption can all react to the same hover state. */}
         <div
           className={`grid gap-4 md:gap-5 mb-12 md:mb-16 ${
             active.thumbnails && active.thumbnails.length === 2
@@ -317,26 +396,40 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           {active.thumbnails && active.thumbnails.length > 0
             ? active.thumbnails.map((thumb) =>
                 thumb.imageSrc ? (
-                  <div key={thumb.videoId} className="block">
+                  <div key={thumb.videoId} className="group block">
+                    {/* Frame — 1px hairline border transitions to gold on hover.
+                        overflow-hidden clips the image's hover zoom. */}
                     <div
                       className={`relative ${
                         thumb.aspectClass ?? "aspect-video"
-                      } overflow-hidden`}
+                      } overflow-hidden border border-lma-cream/10 group-hover:border-lma-gold transition-colors duration-200`}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={thumb.imageSrc || "/placeholder.svg"}
                         alt={thumb.alt}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full"
+                        className="absolute inset-0 w-full h-full transition-transform duration-[400ms] ease-out group-hover:scale-[1.04]"
                         style={{
                           objectFit: thumb.objectFit ?? "cover",
                           objectPosition: thumb.objectPosition ?? "center",
                         }}
                       />
+                      {/* Vignette overlay — 0.15 black wash that fades in
+                          on hover (200ms in, 150ms out). Sits beneath the
+                          gold border via z-index and is pointer-transparent
+                          so it never intercepts clicks/hovers. */}
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 pointer-events-none bg-black/0 group-hover:bg-black/15 transition-[background-color] duration-150 group-hover:duration-200"
+                      />
                     </div>
                     <p className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase">
-                      <span className="text-lma-gold">{thumb.primaryLabel}</span>
+                      {/* Gold celebrity / category name shifts to brighter
+                          gold (#D4B570) on row hover, smooth 200ms. */}
+                      <span className="text-lma-gold group-hover:text-[#D4B570] transition-colors duration-200">
+                        {thumb.primaryLabel}
+                      </span>
                       <span className="text-lma-cream/60"> / {thumb.secondaryLabel}</span>
                     </p>
                   </div>
@@ -420,6 +513,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
+        </div>
         </div>
       </div>
 
