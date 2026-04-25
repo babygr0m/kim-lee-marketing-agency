@@ -63,6 +63,12 @@ export type CaseStudyData = {
   featuredEmbed?: CaseStudyEmbed
   thumbnails?: CaseStudyThumbnail[]
   archiveLink?: CaseStudyArchiveLink
+  /**
+   * Optional per-tab "Work with us" CTA destination. Falls back to
+   * `/contact?service=affiliate-marketing` when omitted so existing tabs
+   * (Fashion Nova, Forever 21) keep their current behavior.
+   */
+  ctaHref?: string
 }
 
 export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[] }) {
@@ -354,7 +360,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         {/* CTA + Prev/Next */}
         <div className="flex flex-wrap items-center gap-6 md:gap-8">
           <a
-            href="/contact?service=affiliate-marketing"
+            href={active.ctaHref ?? "/contact?service=affiliate-marketing"}
             onMouseEnter={() => setIsCtaHovered(true)}
             onMouseLeave={() => setIsCtaHovered(false)}
             className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"

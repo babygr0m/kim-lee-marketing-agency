@@ -57,10 +57,10 @@ export function FeaturedCaseStudy() {
             {/* Body Copy */}
             <div className="font-sans text-lma-body/70 text-sm md:text-base leading-relaxed mb-8 md:mb-12 max-w-md space-y-4">
               <p>
-                Developed Fashion Nova&apos;s Social Media Department and digital marketing infrastructure from the ground up, establishing strategy and scaling brand awareness through influencer partnerships and targeted social campaigns. Cultivated original concepts for celebrity partnerships, social media campaigns, influencer strategies, and brand placements to maximize reach and return across every digital platform.
+                Built Fashion Nova&apos;s social media department and digital marketing infrastructure from the ground up over eight years — establishing the influencer strategy, celebrity campaign engine, and brand placement framework that scaled the company from local boutique to $1B+ in annual revenue.
               </p>
               <p>
-                Facilitated every major celebrity campaign: sourcing talent, managing negotiations and contracts, coordinating editorial shoots, and spearheading brand events and music, TV, and film placements. Grew a following of millions, generated billions of impressions, and created hundreds of viral moments that defined the brand&apos;s cultural position.
+                Sourced and led every major celebrity campaign — Cardi B, Megan Thee Stallion, Amber Rose, Cassie — generating billions of impressions and defining the brand&apos;s cultural position.
               </p>
             </div>
 

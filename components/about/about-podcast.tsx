@@ -10,12 +10,17 @@ export function AboutPodcast() {
     <section className="bg-lma-black px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-5 md:gap-12 lg:gap-16 items-center">
-          {/* Cover art placeholder — 2/5 col */}
+          {/* Cover art — 2/5 col */}
           <div className="md:col-span-2">
-            <div className="relative aspect-square w-full overflow-hidden border border-lma-cream/10 bg-lma-cream/[0.03] flex items-center justify-center">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-lma-cream/40 text-center px-4">
-                ME-AND-WHO-ELS-COVER
-              </span>
+            <div className="relative aspect-square w-full overflow-hidden border border-lma-cream/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/me-and-who-els-cover.jpeg"
+                alt="Me and Who Els podcast cover art — chunky olive script logo on a cream background"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full"
+                style={{ objectFit: "cover", objectPosition: "center" }}
+              />
             </div>
           </div>
 
