@@ -31,6 +31,16 @@ const TIMELINE_OPTIONS = [
   "Just exploring",
 ]
 
+const SOCIAL_PLATFORMS = [
+  { value: "instagram", label: "Instagram", prefix: "@" },
+  { value: "tiktok", label: "TikTok", prefix: "@" },
+  { value: "youtube", label: "YouTube", prefix: "@" },
+  { value: "x", label: "X / Twitter", prefix: "@" },
+  { value: "facebook", label: "Facebook", prefix: "/" },
+  { value: "linkedin", label: "LinkedIn", prefix: "/" },
+  { value: "other", label: "Other", prefix: "" },
+] as const
+
 const labelClass =
   "block font-mono text-[11px] uppercase tracking-[0.1em] text-lma-gold mb-2"
 const fieldClass =
@@ -41,7 +51,11 @@ const Required = () => <span className="text-lma-gold">*</span>
 export function ContactForm() {
   const searchParams = useSearchParams()
   const [serviceValue, setServiceValue] = useState<string>("not-sure")
+  const [socialPlatform, setSocialPlatform] =
+    useState<(typeof SOCIAL_PLATFORMS)[number]["value"]>("instagram")
   const [submitted, setSubmitted] = useState(false)
+
+  const activePlatform = SOCIAL_PLATFORMS.find((p) => p.value === socialPlatform)
 
   // Pre-fill from ?service= query param
   useEffect(() => {
@@ -143,6 +157,64 @@ export function ContactForm() {
             placeholder="https://yourbrand.com"
             className={fieldClass}
           />
+        </div>
+
+        {/* Primary social channel */}
+        <div>
+          <label htmlFor="social-handle" className={labelClass}>
+            Primary social channel
+          </label>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="sm:w-[42%] relative">
+              <select
+                id="social-platform"
+                name="socialPlatform"
+                value={socialPlatform}
+                onChange={(e) =>
+                  setSocialPlatform(
+                    e.target.value as (typeof SOCIAL_PLATFORMS)[number]["value"],
+                  )
+                }
+                className={`${fieldClass} appearance-none cursor-pointer pr-10`}
+                aria-label="Social platform"
+              >
+                {SOCIAL_PLATFORMS.map((opt) => (
+                  <option
+                    key={opt.value}
+                    value={opt.value}
+                    className="bg-lma-black text-lma-cream"
+                  >
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 12 8"
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-2 text-lma-gold"
+              >
+                <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="square" />
+              </svg>
+            </div>
+            <div className="sm:flex-1 flex items-stretch border border-lma-cream/15 focus-within:border-lma-gold transition-colors">
+              {activePlatform?.prefix && (
+                <span className="flex items-center px-4 font-mono text-sm text-lma-gold border-r border-lma-cream/15 select-none">
+                  {activePlatform.prefix}
+                </span>
+              )}
+              <input
+                id="social-handle"
+                name="socialHandle"
+                type="text"
+                placeholder={
+                  activePlatform?.prefix
+                    ? "yourbrand"
+                    : "Profile URL or handle"
+                }
+                className="flex-1 bg-transparent text-lma-cream placeholder:text-lma-cream/30 px-4 py-3.5 font-sans text-sm md:text-base focus:outline-none"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Service */}
