@@ -61,8 +61,9 @@ export function Hero() {
               the stat row so the row doesn't feel crammed against it.
             - Numbers bumped from `text-lg md:text-xl` → `text-3xl md:text-5xl
               lg:text-6xl` so they read as a hero proof bar, not a footnote.
-            - `duration={2800}` slows the count-up from the 1200ms default to
-              ~2.8s so you can actually watch the digits climb. */}
+            - `duration={4500}` runs the logarithmic count over ~4.5s so the
+              value visibly climbs through hundreds → thousands → millions →
+              billions, spending ~500ms in each magnitude tier. */}
         <div className="w-full mt-16 md:mt-24">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0">
             {stats.map((stat, index) => (
@@ -74,7 +75,7 @@ export function Hero() {
               >
                 <AnimatedStat
                   value={stat.value}
-                  duration={2800}
+                  duration={4500}
                   className="font-display text-lma-cream text-3xl md:text-5xl lg:text-6xl tracking-tight leading-none"
                 />
                 <span className="text-lma-body/70 text-[10px] md:text-xs tracking-[0.15em] uppercase leading-relaxed">
