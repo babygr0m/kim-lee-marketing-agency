@@ -17,10 +17,11 @@ export function FeaturedCaseStudy() {
       <div className="max-w-7xl mx-auto">
         {/* Two Column Layout — vertically centered against each other so the
             shorter video card no longer floats above a much taller content
-            column. Video bumped to 60% width for more visual weight. */}
+            column. Video bumped to 65% width so the autoplay hero carries more
+            visual weight against the right-column copy. */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 lg:items-center">
-          {/* Left Column - Video (60%) */}
-          <div className="lg:w-[60%]">
+          {/* Left Column - Video (65%) */}
+          <div className="lg:w-[65%]">
             {/* Decorative autoplay-loop hero — full video lives on /case-studies */}
             <div
               className="relative w-full overflow-hidden border border-lma-cream/10"
@@ -39,8 +40,8 @@ export function FeaturedCaseStudy() {
             </div>
           </div>
 
-          {/* Right Column - Content (40%) */}
-          <div className="lg:w-[40%] flex flex-col justify-center">
+          {/* Right Column - Content (35%) */}
+          <div className="lg:w-[35%] flex flex-col justify-center">
             {/* Eyebrow */}
             <span className="text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 md:mb-8">
               Featured Case Study / 01

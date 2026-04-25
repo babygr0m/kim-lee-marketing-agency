@@ -176,8 +176,9 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "/case-studies/ivy-city-featured.webp",
       },
     },
-    // Two hero portrait stills — kept at 3:4 with the narrower 2-up grid in
-    // the tabbed component so the row reads as a clean editorial pair.
+    // Uniform 3:4 portrait frames across all four thumbnails — matches
+    // Forever 21 row sizing and crops landscape stills tightly so subjects
+    // stay in frame.
     thumbnails: [
       {
         videoId: "ivy-thumb-1",
@@ -188,6 +189,28 @@ const caseStudies: CaseStudyData[] = [
         imageSrc: "/case-studies/ivy-city-thumb-1.jpg",
         aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
+      },
+      {
+        videoId: "ivy-thumb-2",
+        href: "https://www.instagram.com/ivycityco/",
+        alt: "Ivy City Co creator content — two women in autumn dresses walking past a brick building",
+        primaryLabel: "Creator",
+        secondaryLabel: "Content",
+        imageSrc: "/case-studies/ivy-city-thumb-2.jpg",
+        aspectClass: "aspect-[3/4]",
+        objectPosition: "center",
+      },
+      {
+        videoId: "ivy-thumb-3",
+        href: "https://www.instagram.com/ivycityco/",
+        alt: "Ivy City Co product range — three women in pastel formal gowns on stone steps",
+        primaryLabel: "Product",
+        secondaryLabel: "Range",
+        imageSrc: "/case-studies/ivy-city-thumb-3.webp",
+        aspectClass: "aspect-[3/4]",
+        // Group shot is centered horizontally in the original — center crop
+        // keeps all three subjects visible inside the narrower frame.
+        objectPosition: "center",
       },
       {
         videoId: "ivy-thumb-4",

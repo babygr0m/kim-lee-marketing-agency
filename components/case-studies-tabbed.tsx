@@ -229,11 +229,11 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
         {/* Narrative + Featured Asset */}
         <div className="grid gap-10 lg:gap-16 lg:grid-cols-[1.5fr_1fr] mb-12 md:mb-16">
-          <div className="space-y-6 md:space-y-7 max-w-[680px]">
+          <div className="space-y-6 md:space-y-7 max-w-[720px]">
             {active.narrative.map((para, i) => (
               <p
                 key={i}
-                className="font-sans text-lma-cream/80 text-base md:text-lg lg:text-xl leading-relaxed"
+                className="font-sans text-lma-cream/80 text-lg md:text-xl lg:text-2xl leading-relaxed"
               >
                 {para}
               </p>
