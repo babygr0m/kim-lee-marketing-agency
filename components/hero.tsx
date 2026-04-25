@@ -19,8 +19,12 @@ export function Hero() {
       {/* Flat dark background - no video, no imagery */}
       <div className="absolute inset-0 bg-lma-black" />
 
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 lg:px-20 pt-24 pb-8 md:pb-12">
+      {/* Content Container — bumped bottom padding from `pb-8 md:pb-12`
+          → `pb-16 md:pb-24` to push the proof bar away from the viewport
+          edge, and the proof bar itself now has its own top margin so it
+          sits well below the headline / CTA block instead of being crammed
+          against it. */}
+      <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 lg:px-20 pt-24 pb-16 md:pb-24">
         {/* Middle Section - Headline & CTA.
             Hero stagger reveal classes (lma-reveal-*) drive the editorial
             entrance: headline → kicker → CTA. The homepage hero has no
@@ -50,19 +54,28 @@ export function Hero() {
         {/* Bottom Section - Proof Bar.
             Numeric stat values are animated with <AnimatedStat>: numbers
             count up from 0 → target on viewport entry; non-numeric values
-            (VERIFIED) fade in instead. */}
-        <div className="w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 md:gap-y-0">
+            (VERIFIED) fade in instead.
+
+            Sizing & timing pass:
+            - `mt-16 md:mt-24` puts real breathing room between the CTA and
+              the stat row so the row doesn't feel crammed against it.
+            - Numbers bumped from `text-lg md:text-xl` → `text-3xl md:text-5xl
+              lg:text-6xl` so they read as a hero proof bar, not a footnote.
+            - `duration={2800}` slows the count-up from the 1200ms default to
+              ~2.8s so you can actually watch the digits climb. */}
+        <div className="w-full mt-16 md:mt-24">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0">
             {stats.map((stat, index) => (
               <div
                 key={stat.value}
-                className={`flex flex-col gap-1 px-0 md:px-6 ${
+                className={`flex flex-col gap-2 md:gap-3 px-0 md:px-6 ${
                   index !== 0 ? "md:border-l md:border-lma-cream/20" : ""
                 } ${index % 2 !== 0 ? "pl-6 border-l border-lma-cream/20 md:border-l md:pl-6" : ""}`}
               >
                 <AnimatedStat
                   value={stat.value}
-                  className="font-display text-lma-cream text-lg md:text-xl tracking-tight"
+                  duration={2800}
+                  className="font-display text-lma-cream text-3xl md:text-5xl lg:text-6xl tracking-tight leading-none"
                 />
                 <span className="text-lma-body/70 text-[10px] md:text-xs tracking-[0.15em] uppercase leading-relaxed">
                   {stat.label}

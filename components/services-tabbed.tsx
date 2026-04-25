@@ -147,7 +147,13 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
       <div className="relative flex-1">
         {isAbstract && <ServiceSectionBg slug={active.slug} />}
 
-        <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-12 md:pb-16 h-full">
+        {/* Keyed wrapper — re-mounts on tab change so the `lma-tab-enter`
+            keyframe runs fresh (250ms ease-out fade + 4px rise after a
+            50ms pause). Reduced motion drops the animation in CSS. */}
+        <div
+          key={active.slug}
+          className="lma-tab-enter relative z-10 px-6 md:px-12 lg:px-20 pb-12 md:pb-16 h-full"
+        >
           {isAbstract ? (
             // ---------- Centered abstract layout ----------
             <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center min-h-[60vh]">
