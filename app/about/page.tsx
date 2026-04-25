@@ -38,7 +38,7 @@ export default function AboutPage() {
             A decade of category-defining work.
           </p>
         </div>
-        <LogoWall />
+        <LogoWall showEyebrow={false} />
       </section>
 
       <div className="mx-auto h-px w-full max-w-7xl bg-lma-cream/[0.08]" />

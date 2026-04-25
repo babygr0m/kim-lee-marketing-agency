@@ -86,15 +86,17 @@ const brands = [
 // Duplicate the array so the loop can scroll seamlessly from 0 to -50%
 const loopBrands = [...brands, ...brands]
 
-export function LogoWall() {
+export function LogoWall({ showEyebrow = true }: { showEyebrow?: boolean }) {
   return (
     <section className="bg-lma-black py-24 md:py-32 lg:py-40">
       {/* Inject keyframes directly to guarantee they're available */}
       <style dangerouslySetInnerHTML={{ __html: scrollKeyframes }} />
-      {/* Eyebrow */}
-      <p className="text-center text-lma-gold text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-16 md:mb-20 px-6">
-        Trusted by brands that moved culture
-      </p>
+      {/* Eyebrow — suppressed when consumer page already provides its own header */}
+      {showEyebrow && (
+        <p className="text-center text-lma-gold text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-16 md:mb-20 px-6">
+          Trusted by brands that moved culture
+        </p>
+      )}
 
       {/* Carousel - full-width, overflow hidden, with edge fade mask */}
       <div
