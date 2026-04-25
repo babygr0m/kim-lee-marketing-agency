@@ -169,7 +169,11 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
   const goToNext = () => setTab(activeIndex < caseStudies.length - 1 ? activeIndex + 1 : 0)
 
   return (
-    <section className="bg-lma-black pt-24 md:pt-28">
+    // Section is intentionally TRANSPARENT — the fixed gradient layer
+    // (rendered below) sits at -z-10 and provides the dark page bg via its
+    // own #0A0A0A base. Adding bg-lma-black here would paint over the
+    // gradient and we'd be back to a solid black page.
+    <section className="relative pt-24 md:pt-28">
       {/* Hero — stagger reveal on first paint via lma-reveal-* classes. */}
       <div className="px-6 md:px-12 lg:px-20 pt-12 md:pt-16 pb-10 md:pb-14 max-w-6xl mx-auto text-center">
         <p className="lma-reveal-eyebrow font-sans text-[10px] md:text-xs tracking-[0.25em] uppercase text-lma-gold font-semibold mb-5">
@@ -243,18 +247,20 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         </div>
       </div>
 
-      {/* Active Case Study — full-bleed gradient wrapper.
-          The gradient layer is rendered here (full section width) and
-          continuously cross-fades between brand identities via CaseStudyTabBg.
-          Inner content is keyed on displayIndex so it unmounts/re-mounts
-          on swap, triggering the lma-tab-enter reveal. The exit fade is
-          driven by phase="exiting" → opacity 0 + translateY(-4px). */}
-      <div className="relative">
-        <CaseStudyTabBg activeSlug={caseStudies[activeIndex].slug} />
+      {/* Fixed full-viewport gradient layer — pulled OUT of the active
+          case study div so it always covers the whole page (header to
+          footer), and animated based on the active tab. Sits at -z-10
+          so all content naturally stacks above it without needing its
+          own positive z-index. */}
+      <CaseStudyTabBg activeSlug={caseStudies[activeIndex].slug} />
 
+      {/* Active Case Study content. Keyed on displayIndex so it unmounts/
+          re-mounts on tab swap, triggering the `lma-tab-enter` reveal. The
+          exit fade is driven by phase="exiting" → opacity 0 + translateY. */}
+      <div>
         <div
           key={displayIndex}
-          className={`relative z-10 px-6 md:px-12 lg:px-20 pb-16 md:pb-20 max-w-7xl mx-auto ${
+          className={`px-6 md:px-12 lg:px-20 pb-16 md:pb-20 max-w-7xl mx-auto ${
             phase === "entering" ? "lma-tab-enter" : ""
           }`}
           style={{
