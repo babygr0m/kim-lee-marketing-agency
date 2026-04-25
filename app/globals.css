@@ -150,21 +150,18 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Services page — animated gradient treatments for abstract service cards.
+ * Services page — ambient gradient backgrounds for the 3 abstract services.
  *
- * Three distinct gradient patterns power the abstract services on /services
- * (TikTok Shop / Affiliate Marketing / Paid Media). All three use only the
- * brand palette (#0A0A0A black, #C9A961 gold, #F4F1EA cream) and rely on
- * GPU-accelerated `transform` / `background-position` animations so multiple
- * cards can run simultaneously without performance issues. No JS, no canvas.
- *
- * Naming convention: `service-<service>-<motion>` keyframes paired with
- * `animate-<keyframe>` utility classes that the ServiceVisual component
- * applies inline.
+ * Applied as full-bleed section backgrounds (NOT contained cards) on
+ * /services for TikTok Shop, Affiliate Marketing, and Paid Media. Opacities
+ * are intentionally low (6–8% gold) so the motion is barely perceptible
+ * peripheral motion behind the centered text — fully readable at every
+ * phase of every animation. Pure CSS (background-position / transform);
+ * no JS, no canvas.
  * ------------------------------------------------------------------------- */
 
-/* Service 01 — TikTok Shop. Radial spotlight drifts in a circular path so
-   the gold center feels like a slowly scanning beam. */
+/* Service 01 — TikTok Shop. Radial gold spotlight drifts in a circular
+   path. 18s ease-in-out infinite. */
 @keyframes service-radial-drift {
   0%, 100% { background-position: 0% 0%; }
   25%      { background-position: 100% 0%; }
@@ -172,37 +169,26 @@
   75%      { background-position: 0% 100%; }
 }
 .animate-service-radial-drift {
-  animation: service-radial-drift 12s ease-in-out infinite;
+  animation: service-radial-drift 18s ease-in-out infinite;
 }
 
-/* Service 02 — Affiliate Marketing. Diagonal linear gradient slides
-   north-east → south-west through the card. */
+/* Service 02 — Affiliate Marketing. 135° linear gradient slides diagonally
+   across the section. 12s ease-in-out infinite. */
 @keyframes service-linear-shift {
   0%, 100% { background-position: 0% 0%; }
   50%      { background-position: 100% 100%; }
 }
 .animate-service-linear-shift {
-  animation: service-linear-shift 8s ease-in-out infinite;
-}
-
-/* Service 02 — Affiliate Marketing companion layer. Diagonal lines drift
-   in the same 135° direction; translate matches the 80px stripe period
-   used on the underlying repeating gradient so the loop is seamless. */
-@keyframes service-lines-drift {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(80px, 80px); }
-}
-.animate-service-lines-drift {
-  animation: service-lines-drift 8s linear infinite;
+  animation: service-linear-shift 12s ease-in-out infinite;
 }
 
 /* Service 04 — Paid Media. Conic gradient rotates around its center; the
    layer is sized 200% × 200% and centered with translate(-50%,-50%) so the
-   rotation never reveals the container edges. */
+   rotation never reveals the container edges. 28s linear infinite. */
 @keyframes service-conic-rotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 .animate-service-conic-rotate {
-  animation: service-conic-rotate 20s linear infinite;
+  animation: service-conic-rotate 28s linear infinite;
 }
