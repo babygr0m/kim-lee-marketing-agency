@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { useInView } from "@/hooks/use-in-view"
 
 // CSS keyframes for the infinite scroll animation
 const scrollKeyframes = `
@@ -86,9 +89,19 @@ const brands = [
 // Duplicate the array so the loop can scroll seamlessly from 0 to -50%
 const loopBrands = [...brands, ...brands]
 
+// Total reveal time once the section enters the viewport:
+// 11 * 60ms (last logo's start delay) + 350ms (per-logo duration) = ~1010ms.
+const PER_LOGO_DELAY_MS = 60
+const PER_LOGO_DURATION_MS = 350
+
 export function LogoWall({ showEyebrow = true }: { showEyebrow?: boolean }) {
+  // Watch the section itself — fire reveals when the section is 15%
+  // visible per the spec. Once `inView` is true the hook disconnects
+  // its observer, so re-scrolling never re-triggers.
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 })
+
   return (
-    <section className="bg-lma-black py-24 md:py-32 lg:py-40">
+    <section ref={ref} className="bg-lma-black py-24 md:py-32 lg:py-40">
       {/* Inject keyframes directly to guarantee they're available */}
       <style dangerouslySetInnerHTML={{ __html: scrollKeyframes }} />
       {/* Eyebrow — suppressed when consumer page already provides its own header */}
@@ -112,26 +125,51 @@ export function LogoWall({ showEyebrow = true }: { showEyebrow?: boolean }) {
           className="flex w-max hover:[animation-play-state:paused]"
           style={{ animation: "logo-scroll 50s linear infinite" }}
         >
-          {loopBrands.map((brand, index) => (
-            <div
-              key={`${brand.name}-${index}`}
-              className="flex h-16 shrink-0 items-center justify-center px-10 md:px-14 lg:px-16"
-            >
-              <Image
-                src={brand.logo || "/placeholder.svg"}
-                alt={brand.name}
-                width={200}
-                height={64}
-                className={`w-auto object-contain ${
-                  brand.needsBlendMode ? "mix-blend-screen" : ""
-                }`}
-                style={{ 
-                  filter: "brightness(0) invert(1)",
-                  maxHeight: `${brand.maxHeight}px`
-                }}
-              />
-            </div>
-          ))}
+          {loopBrands.map((brand, index) => {
+            // Stagger reveal applies to the first 12 logos only — those
+            // sit on screen during the initial reveal and need to fade
+            // in one-by-one. The duplicate set (indices 12+) sits off
+            // the right edge of the mask, so it can render at final
+            // state immediately; staggering them would create a
+            // visible second wave once the carousel scrolls them in.
+            const isOriginal = index < brands.length
+            const delayMs = isOriginal ? index * PER_LOGO_DELAY_MS : 0
+
+            return (
+              <div
+                key={`${brand.name}-${index}`}
+                {...(isOriginal
+                  ? {
+                      "data-reveal": "fade-up-6",
+                      "data-revealed": inView ? "true" : "false",
+                    }
+                  : {})}
+                style={
+                  isOriginal
+                    ? {
+                        transitionDuration: `${PER_LOGO_DURATION_MS}ms`,
+                        transitionDelay: `${delayMs}ms`,
+                      }
+                    : undefined
+                }
+                className="flex h-16 shrink-0 items-center justify-center px-10 md:px-14 lg:px-16"
+              >
+                <Image
+                  src={brand.logo || "/placeholder.svg"}
+                  alt={brand.name}
+                  width={200}
+                  height={64}
+                  className={`w-auto object-contain ${
+                    brand.needsBlendMode ? "mix-blend-screen" : ""
+                  }`}
+                  style={{
+                    filter: "brightness(0) invert(1)",
+                    maxHeight: `${brand.maxHeight}px`,
+                  }}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

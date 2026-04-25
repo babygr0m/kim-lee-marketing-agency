@@ -314,6 +314,43 @@
 }
 
 /* ---------------------------------------------------------------------------
+ * Homepage scroll-triggered reveals (data-reveal API).
+ *
+ * Each major homepage section uses IntersectionObserver via the useInView
+ * hook to detect viewport entry, then sets `data-revealed="true"` on each
+ * targeted element. The CSS selectors below manage from-state (opacity 0
+ * + small transform) and to-state (opacity 1 + identity transform).
+ *
+ *   data-reveal="fade-up-6"   → translateY(6px)  → 0   (logos)
+ *   data-reveal="fade-up-8"   → translateY(8px)  → 0   (eyebrow / kicker / body / CTA)
+ *   data-reveal="fade-up-12"  → translateY(12px) → 0   (Anton headlines)
+ *   data-reveal="scale-97"    → scale(0.97)      → 1   (Cardi B video card)
+ *   data-reveal="slide-x-12"  → translateX(-12px)→ 0   (service rows)
+ *   data-reveal="slide-x-16"  → translateX(-16px)→ 0   (Kim portrait)
+ *
+ * Per-element stagger is applied via inline `transitionDelay`. Each reveal
+ * runs ONCE per page load — useInView disconnects on first intersection.
+ * ------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 400ms ease-out,
+    transform 400ms ease-out;
+  will-change: opacity, transform;
+}
+[data-reveal="fade-up-6"]  { transform: translateY(6px); }
+[data-reveal="fade-up-8"]  { transform: translateY(8px); }
+[data-reveal="fade-up-12"] { transform: translateY(12px); }
+[data-reveal="scale-97"]   { transform: scale(0.97); }
+[data-reveal="slide-x-12"] { transform: translateX(-12px); }
+[data-reveal="slide-x-16"] { transform: translateX(-16px); }
+
+[data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------------
  * prefers-reduced-motion — accessibility opt-out.
  *
  * For users who set their OS preference, all decorative motion is disabled
@@ -350,5 +387,14 @@
   /* Tab swap — instant. */
   .lma-tab-enter {
     animation: none !important;
+  }
+
+  /* Homepage scroll-triggered reveals — render at final state immediately,
+     no transition. Even if the IntersectionObserver hasn't toggled
+     data-revealed yet (or never will, for older browsers), content shows. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
