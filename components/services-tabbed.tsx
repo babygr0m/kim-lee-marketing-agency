@@ -60,53 +60,57 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
         </p>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="relative border-b border-lma-cream/10 mb-10 md:mb-14">
-        {/* Left arrow */}
-        <button
-          onClick={() => scrollTabs("left")}
-          aria-label="Scroll tabs left"
-          className="absolute left-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-r from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
+      {/* Tab Navigation — tabs are centered on md+ and the arrows sit at
+          the edges of a constrained max-w-7xl rail so they read as paired
+          nav controls instead of disconnected page-edge chevrons. */}
+      <div className="border-b border-lma-cream/10 mb-10 md:mb-14">
+        <div className="relative max-w-7xl mx-auto">
+          {/* Left arrow */}
+          <button
+            onClick={() => scrollTabs("left")}
+            aria-label="Scroll tabs left"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 text-lma-cream/70 hover:text-lma-gold transition-colors"
+          >
+            <ChevronLeft className="w-9 h-9" strokeWidth={1.75} />
+          </button>
 
-        {/* Scrollable tabs */}
-        <div
-          ref={tabsRef}
-          className="flex overflow-x-auto scrollbar-none px-6 md:px-14 lg:px-20"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {services.map((service, index) => {
-            const isActive = index === activeIndex
-            return (
-              <button
-                key={service.slug}
-                ref={isActive ? activeTabRef : null}
-                onClick={() => setActiveIndex(index)}
-                className={`relative flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
-                  isActive
-                    ? "text-lma-gold"
-                    : "text-lma-cream/60 hover:text-lma-cream"
-                }`}
-              >
-                {service.shortLabel}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-lma-gold" />
-                )}
-              </button>
-            )
-          })}
+          {/* Scrollable tabs */}
+          <div
+            ref={tabsRef}
+            className="flex md:justify-center overflow-x-auto scrollbar-none px-6 md:px-16"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {services.map((service, index) => {
+              const isActive = index === activeIndex
+              return (
+                <button
+                  key={service.slug}
+                  ref={isActive ? activeTabRef : null}
+                  onClick={() => setActiveIndex(index)}
+                  className={`relative flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
+                    isActive
+                      ? "text-lma-gold"
+                      : "text-lma-cream/60 hover:text-lma-cream"
+                  }`}
+                >
+                  {service.shortLabel}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-lma-gold" />
+                  )}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Right arrow */}
+          <button
+            onClick={() => scrollTabs("right")}
+            aria-label="Scroll tabs right"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 text-lma-cream/70 hover:text-lma-gold transition-colors"
+          >
+            <ChevronRight className="w-9 h-9" strokeWidth={1.75} />
+          </button>
         </div>
-
-        {/* Right arrow */}
-        <button
-          onClick={() => scrollTabs("right")}
-          aria-label="Scroll tabs right"
-          className="absolute right-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-l from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
       </div>
 
       {/* Active Service Content */}

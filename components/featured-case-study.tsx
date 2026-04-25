@@ -15,10 +15,12 @@ export function FeaturedCaseStudy() {
   return (
     <section className="bg-lma-black px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto">
-        {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-          {/* Left Column - Video (55%) */}
-          <div className="lg:w-[55%]">
+        {/* Two Column Layout — vertically centered against each other so the
+            shorter video card no longer floats above a much taller content
+            column. Video bumped to 60% width for more visual weight. */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 lg:items-center">
+          {/* Left Column - Video (60%) */}
+          <div className="lg:w-[60%]">
             {/* Decorative autoplay-loop hero — full video lives on /case-studies */}
             <div
               className="relative w-full overflow-hidden border border-lma-cream/10"
@@ -37,8 +39,8 @@ export function FeaturedCaseStudy() {
             </div>
           </div>
 
-          {/* Right Column - Content (45%) */}
-          <div className="lg:w-[45%] flex flex-col justify-center">
+          {/* Right Column - Content (40%) */}
+          <div className="lg:w-[40%] flex flex-col justify-center">
             {/* Eyebrow */}
             <span className="text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 md:mb-8">
               Featured Case Study / 01

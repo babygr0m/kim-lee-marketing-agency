@@ -176,7 +176,8 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "/case-studies/ivy-city-featured.webp",
       },
     },
-    // Uniform 3:4 portrait frames — matches Forever 21 row sizing.
+    // Two hero portrait stills — kept at 3:4 with the narrower 2-up grid in
+    // the tabbed component so the row reads as a clean editorial pair.
     thumbnails: [
       {
         videoId: "ivy-thumb-1",
@@ -187,28 +188,6 @@ const caseStudies: CaseStudyData[] = [
         imageSrc: "/case-studies/ivy-city-thumb-1.jpg",
         aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
-      },
-      {
-        videoId: "ivy-thumb-2",
-        href: "https://www.instagram.com/ivycityco/",
-        alt: "Ivy City Co creator content — two women in autumn dresses walking past a brick building",
-        primaryLabel: "Creator",
-        secondaryLabel: "Content",
-        imageSrc: "/case-studies/ivy-city-thumb-2.jpg",
-        aspectClass: "aspect-[3/4]",
-        objectPosition: "center",
-      },
-      {
-        videoId: "ivy-thumb-3",
-        href: "https://www.instagram.com/ivycityco/",
-        alt: "Ivy City Co product range — three women in pastel formal gowns on stone steps",
-        primaryLabel: "Product",
-        secondaryLabel: "Range",
-        imageSrc: "/case-studies/ivy-city-thumb-3.webp",
-        aspectClass: "aspect-[3/4]",
-        // Group shot is centered horizontally in the original — center crop
-        // keeps all three subjects visible inside the narrower frame.
-        objectPosition: "center",
       },
       {
         videoId: "ivy-thumb-4",
@@ -250,8 +229,8 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "/case-studies/sol-de-janeiro-featured.webp",
       },
     },
-    // Sol assets are mostly square — 3:4 frames keep a uniform row with
-    // F21 / Ivy and crop minimally.
+    // Two hero stills — Bum Bum Cream product hero + brand TikTok Shop
+    // moment. Rendered in the same narrower 2-up grid as Ivy.
     thumbnails: [
       {
         videoId: "sol-thumb-1",
@@ -260,26 +239,6 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Bum Bum Cream",
         secondaryLabel: "Hero",
         imageSrc: "/case-studies/sol-de-janeiro-thumb-1.webp",
-        aspectClass: "aspect-[3/4]",
-        objectPosition: "center",
-      },
-      {
-        videoId: "sol-thumb-2",
-        href: "https://www.instagram.com/soldejaneiro/",
-        alt: "Sol de Janeiro Cheirosa 62 fragrance mist — signature scent editorial",
-        primaryLabel: "Cheirosa 62",
-        secondaryLabel: "Signature",
-        imageSrc: "/case-studies/sol-de-janeiro-thumb-2.webp",
-        aspectClass: "aspect-[3/4]",
-        objectPosition: "center",
-      },
-      {
-        videoId: "sol-thumb-3",
-        href: "https://www.instagram.com/soldejaneiro/",
-        alt: "Sol de Janeiro product portfolio — Cheirosa 62 fragrance mist outdoor lifestyle",
-        primaryLabel: "Product",
-        secondaryLabel: "Portfolio",
-        imageSrc: "/case-studies/sol-de-janeiro-thumb-3.jpg",
         aspectClass: "aspect-[3/4]",
         objectPosition: "center",
       },

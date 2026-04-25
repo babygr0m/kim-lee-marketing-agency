@@ -137,55 +137,58 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         </p>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="relative border-b border-lma-cream/10 mb-10 md:mb-14">
-        <button
-          onClick={goToPrev}
-          aria-label="Previous case study"
-          className="absolute left-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-r from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
+      {/* Tab Navigation — wrapped in max-w-4xl so the prev/next arrows sit
+          right beside the centered tab row instead of at the page edges. */}
+      <div className="border-b border-lma-cream/10 mb-10 md:mb-14">
+        <div className="relative max-w-4xl mx-auto">
+          <button
+            onClick={goToPrev}
+            aria-label="Previous case study"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 text-lma-cream/70 hover:text-lma-gold transition-colors"
+          >
+            <ChevronLeft className="w-9 h-9" strokeWidth={1.75} />
+          </button>
 
-        <div
-          ref={tabsRef}
-          className="flex justify-start md:justify-center overflow-x-auto px-6 md:px-14 lg:px-20"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {caseStudies.map((cs, index) => {
-            const isActive = index === activeIndex
-            return (
-              <button
-                key={cs.slug}
-                ref={isActive ? activeTabRef : null}
-                onClick={() => setTab(index)}
-                className={`flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
-                  isActive
-                    ? "text-lma-cream"
-                    : "text-lma-cream/60 hover:text-lma-cream/80"
-                }`}
-              >
-                <span className="relative inline-block px-1 pb-2">
-                  {cs.shortLabel}
-                  {isActive && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-lma-gold"
-                    />
-                  )}
-                </span>
-              </button>
-            )
-          })}
+          <div
+            ref={tabsRef}
+            className="flex justify-start md:justify-center overflow-x-auto px-6 md:px-16"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {caseStudies.map((cs, index) => {
+              const isActive = index === activeIndex
+              return (
+                <button
+                  key={cs.slug}
+                  ref={isActive ? activeTabRef : null}
+                  onClick={() => setTab(index)}
+                  className={`flex-shrink-0 px-5 md:px-7 py-4 md:py-5 font-sans text-xs md:text-sm tracking-[0.15em] uppercase whitespace-nowrap transition-colors duration-200 ${
+                    isActive
+                      ? "text-lma-cream"
+                      : "text-lma-cream/60 hover:text-lma-cream/80"
+                  }`}
+                >
+                  <span className="relative inline-block px-1 pb-2">
+                    {cs.shortLabel}
+                    {isActive && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-lma-gold"
+                      />
+                    )}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+
+          <button
+            onClick={goToNext}
+            aria-label="Next case study"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 text-lma-cream/70 hover:text-lma-gold transition-colors"
+          >
+            <ChevronRight className="w-9 h-9" strokeWidth={1.75} />
+          </button>
         </div>
-
-        <button
-          onClick={goToNext}
-          aria-label="Next case study"
-          className="absolute right-0 top-0 bottom-0 z-10 hidden md:flex items-center justify-center w-12 bg-gradient-to-l from-lma-black via-lma-black to-transparent text-lma-cream/60 hover:text-lma-gold transition-colors"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
       </div>
 
       {/* Active Case Study */}
@@ -226,11 +229,11 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
         {/* Narrative + Featured Asset */}
         <div className="grid gap-10 lg:gap-16 lg:grid-cols-[1.5fr_1fr] mb-12 md:mb-16">
-          <div className="space-y-5 md:space-y-6 max-w-[640px]">
+          <div className="space-y-6 md:space-y-7 max-w-[680px]">
             {active.narrative.map((para, i) => (
               <p
                 key={i}
-                className="font-sans text-lma-cream/80 text-sm md:text-base leading-relaxed"
+                className="font-sans text-lma-cream/80 text-base md:text-lg lg:text-xl leading-relaxed"
               >
                 {para}
               </p>
@@ -281,8 +284,15 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           )}
         </div>
 
-        {/* Thumbnail Row */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-12 md:mb-16">
+        {/* Thumbnail Row — when only 2 thumbs, use a centered 2-up grid at a
+            narrower max width so they don't stretch awkwardly across the row. */}
+        <div
+          className={`grid gap-4 md:gap-5 mb-12 md:mb-16 ${
+            active.thumbnails && active.thumbnails.length === 2
+              ? "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto"
+              : "grid-cols-2 lg:grid-cols-4"
+          }`}
+        >
           {active.thumbnails && active.thumbnails.length > 0
             ? active.thumbnails.map((thumb) =>
                 thumb.imageSrc ? (
