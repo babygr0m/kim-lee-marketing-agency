@@ -17,6 +17,11 @@ export type CaseStudyThumbnail = {
   secondaryLabel: string
 }
 
+export type CaseStudyArchiveLink = {
+  href: string
+  label: string
+}
+
 export type CaseStudyData = {
   slug: string
   shortLabel: string
@@ -28,6 +33,7 @@ export type CaseStudyData = {
   collaborators: string[]
   featuredEmbed?: CaseStudyEmbed
   thumbnails?: CaseStudyThumbnail[]
+  archiveLink?: CaseStudyArchiveLink
 }
 
 export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[] }) {
@@ -254,6 +260,21 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                 </div>
               ))}
         </div>
+
+        {/* Archive Link — sits between thumbnails and collaborators when present */}
+        {active.archiveLink && (
+          <div className="flex justify-center pt-2 pb-2 mb-4 md:mb-6">
+            <a
+              href={active.archiveLink.href}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-2 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-lma-gold hover:text-lma-cream transition-colors no-underline"
+            >
+              {active.archiveLink.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        )}
 
         {/* Collaborators Strip */}
         <div className="border-y border-lma-cream/10 py-6 md:py-8 mb-12 md:mb-16">

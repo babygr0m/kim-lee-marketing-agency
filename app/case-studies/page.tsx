@@ -84,6 +84,44 @@ const caseStudies: CaseStudyData[] = [
       "Hello Kitty",
       "Barbie",
     ],
+    featuredEmbed: {
+      src: "https://www.youtube.com/embed/9N7WbMjozUk?autoplay=1&mute=1&loop=1&playlist=9N7WbMjozUk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1",
+      title: "Forever 21 x Rolling Loud 2023",
+    },
+    thumbnails: [
+      {
+        videoId: "EicIufb-VxE",
+        href: "https://www.youtube.com/watch?v=EicIufb-VxE",
+        alt: "Forever 21 x Juicy Couture featuring Alix Earle",
+        primaryLabel: "Alix Earle",
+        secondaryLabel: "Juicy Couture",
+      },
+      {
+        videoId: "bevSPXctLNA",
+        href: "https://www.youtube.com/watch?v=bevSPXctLNA",
+        alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
+        primaryLabel: "Madison Beer",
+        secondaryLabel: "Holiday",
+      },
+      {
+        videoId: "SWuz2CRqoZ8",
+        href: "https://www.youtube.com/watch?v=SWuz2CRqoZ8",
+        alt: "Forever 21 Holidays with Baby Phat featuring Kimora Lee Simmons",
+        primaryLabel: "Kimora",
+        secondaryLabel: "Baby Phat",
+      },
+      {
+        videoId: "C6t9M6IUO-c",
+        href: "https://www.youtube.com/watch?v=C6t9M6IUO-c",
+        alt: "Forever 21 x Hello Kitty x Sanrio XO Kitty",
+        primaryLabel: "XO Kitty",
+        secondaryLabel: "Hello Kitty",
+      },
+    ],
+    archiveLink: {
+      href: "https://www.instagram.com/p/Cr1BwMEOlyc/",
+      label: "View campaign archive on Instagram",
+    },
   },
   {
     slug: "ivy-city",
