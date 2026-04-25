@@ -14,9 +14,23 @@ const connectLinks = [
   { label: "hello@leemarketingagency.com", href: "mailto:hello@leemarketingagency.com" },
 ]
 
-export function Footer() {
+type FooterProps = {
+  /**
+   * When true, the footer renders without its solid `bg-lma-black` so a
+   * page-level fixed background (e.g. the case-studies gradient layer)
+   * shows through behind it. The hairline top border + content stay
+   * unchanged, only the bg fill is dropped.
+   */
+  transparent?: boolean
+}
+
+export function Footer({ transparent = false }: FooterProps) {
   return (
-    <footer className="border-t border-lma-cream/10 bg-lma-black px-6 py-16 md:py-20">
+    <footer
+      className={`relative z-10 border-t border-lma-cream/10 px-6 py-16 md:py-20 ${
+        transparent ? "bg-transparent" : "bg-lma-black"
+      }`}
+    >
       <div className="mx-auto max-w-7xl">
         {/* Main Footer Grid */}
         <div className="grid gap-12 md:grid-cols-10 md:gap-8">

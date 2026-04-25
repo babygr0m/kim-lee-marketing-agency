@@ -18,9 +18,15 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100)
+      // Tight threshold so the header solid bg kicks in almost immediately
+      // on scroll. With a 100px threshold there was a noticeable window
+      // where page content scrolled visibly THROUGH a transparent nav,
+      // most apparent on /services where centered abstract-service
+      // headlines pass under the nav links.
+      setIsScrolled(window.scrollY > 20)
     }
 
+    handleScroll()
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])

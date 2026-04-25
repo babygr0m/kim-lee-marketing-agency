@@ -287,11 +287,16 @@ const caseStudies: CaseStudyData[] = [
 ]
 
 export default function CaseStudiesPage() {
+  // bg-lma-black is dropped from <main> on this page so the fixed gradient
+  // layer rendered inside <CaseStudiesTabbed> can show through across the
+  // entire viewport (including the footer area). The gradient component
+  // includes its own #0A0A0A solid base, so the page still reads dark even
+  // before any per-tab gradient is layered on top.
   return (
-    <main className="bg-lma-black min-h-screen">
+    <main className="min-h-screen">
       <Header />
       <CaseStudiesTabbed caseStudies={caseStudies} />
-      <Footer />
+      <Footer transparent />
     </main>
   )
 }
