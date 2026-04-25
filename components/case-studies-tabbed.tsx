@@ -220,14 +220,14 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         {/* CTA + Prev/Next */}
         <div className="flex flex-wrap items-center gap-6 md:gap-8">
           <a
-            href="/#contact"
+            href="/contact?service=affiliate-marketing"
             onMouseEnter={() => setIsCtaHovered(true)}
             onMouseLeave={() => setIsCtaHovered(false)}
-            className="group inline-flex items-center gap-2 font-sans text-xs md:text-sm tracking-[0.2em] uppercase text-lma-gold border-b border-lma-gold/40 hover:border-lma-gold pb-1 transition-colors"
+            className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
           >
             Work with us
             <ArrowRight
-              className={`w-4 h-4 transition-transform duration-300 ${
+              className={`w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 ${
                 isCtaHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />
@@ -264,7 +264,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           Let&apos;s make it move.
         </p>
         <a
-          href="/#contact"
+          href="/contact"
           className="inline-flex items-center gap-3 border border-lma-gold px-8 py-4 font-sans text-xs md:text-sm tracking-[0.2em] uppercase text-lma-gold hover:bg-lma-gold hover:text-lma-black transition-colors"
         >
           Book a strategy call

@@ -81,16 +81,16 @@ export function FeaturedCaseStudy() {
               ))}
             </div>
 
-            {/* Text Link */}
+            {/* Button CTA */}
             <a
-              href="#"
+              href="/case-studies#fashion-nova"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="group inline-flex items-center gap-2 text-lma-cream text-sm tracking-[0.1em] uppercase transition-colors duration-300 hover:text-lma-gold"
+              className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors self-start"
             >
               Read the full story
-              <ArrowRight 
-                className={`w-4 h-4 transition-transform duration-300 ${
+              <ArrowRight
+                className={`w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 ${
                   isHovered ? "translate-x-1" : "translate-x-0"
                 }`}
               />

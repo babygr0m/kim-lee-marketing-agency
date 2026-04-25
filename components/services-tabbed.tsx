@@ -158,14 +158,14 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
             {/* CTA + Prev/Next Controls */}
             <div className="flex flex-wrap items-center gap-6 md:gap-8">
               <a
-                href={`/#contact?service=${active.slug}`}
+                href={`/contact?service=${active.slug}`}
                 onMouseEnter={() => setIsLinkHovered(true)}
                 onMouseLeave={() => setIsLinkHovered(false)}
-                className="group inline-flex items-center gap-2 font-sans text-xs md:text-sm tracking-[0.2em] uppercase text-lma-gold border-b border-lma-gold/40 hover:border-lma-gold pb-1 transition-colors"
+                className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
               >
                 Work with us
                 <ArrowRight
-                  className={`w-4 h-4 transition-transform duration-300 ${
+                  className={`w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 ${
                     isLinkHovered ? "translate-x-1" : "translate-x-0"
                   }`}
                 />

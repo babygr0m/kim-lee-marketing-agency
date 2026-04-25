@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ]
 
 export function Header() {
@@ -82,7 +82,7 @@ export function Header() {
 
             {/* CTA Button */}
             <a
-              href="/#contact"
+              href="/contact"
               onMouseEnter={() => setIsCtaHovered(true)}
               onMouseLeave={() => setIsCtaHovered(false)}
               className="group flex items-center gap-2 border border-lma-cream/60 px-5 py-2.5 font-sans text-xs uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
@@ -140,7 +140,7 @@ export function Header() {
 
           {/* CTA Button */}
           <a
-            href="/#contact"
+            href="/contact"
             onClick={() => setIsMobileMenuOpen(false)}
             className="mt-12 flex items-center gap-3 border border-lma-cream/60 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
           >
