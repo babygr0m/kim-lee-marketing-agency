@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import type { ServiceSectionData } from "@/components/service-section"
+import { ServiceVisual } from "@/components/service-visual"
 
 type ServiceTabData = ServiceSectionData & { shortLabel: string }
 
@@ -194,19 +195,16 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
             </div>
           </div>
 
-          {/* Right - Media Placeholder */}
-          <div className="relative aspect-[4/5] lg:aspect-[4/5] bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6">
-                <span className="font-[family-name:var(--font-anton)] text-lma-cream/10 text-6xl md:text-8xl lg:text-9xl tracking-tight block">
-                  {active.number}
-                </span>
-                <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-lma-cream/30 mt-2 block">
-                  {active.shortLabel} Visual
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* Right - Service visual. Hybrid system: 4 services with real
+              campaign imagery render a static <img>, 3 abstract services
+              render a distinct animated gradient treatment. Same wrapper
+              dimensions, hairline border, and hover treatment across all 7
+              so the page reads as a deliberate visual system. */}
+          <ServiceVisual
+            slug={active.slug}
+            number={active.number}
+            shortLabel={active.shortLabel}
+          />
         </div>
       </div>
     </section>
