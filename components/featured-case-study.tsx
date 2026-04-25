@@ -40,8 +40,11 @@ export function FeaturedCaseStudy() {
             </div>
           </div>
 
-          {/* Right Column - Content (35%) */}
-          <div className="lg:w-[35%] flex flex-col justify-center">
+          {/* Right Column - Content (unchanged 45% — flex-shrink handles
+              the overflow vs the wider 65% video so the text column visually
+              stays at its original size and the body copy / headline / CTA
+              don't reflow). */}
+          <div className="lg:w-[45%] flex flex-col justify-center">
             {/* Eyebrow */}
             <span className="text-lma-cream/60 text-[10px] md:text-xs tracking-[0.2em] uppercase mb-6 md:mb-8">
               Featured Case Study / 01
