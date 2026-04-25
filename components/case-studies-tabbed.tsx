@@ -227,18 +227,39 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           ))}
         </div>
 
-        {/* Narrative + Featured Asset */}
-        <div className="grid gap-10 lg:gap-16 lg:grid-cols-[1.5fr_1fr] mb-12 md:mb-16">
-          <div className="space-y-6 md:space-y-7 max-w-[720px]">
-            {active.narrative.map((para, i) => (
-              <p
-                key={i}
-                className="font-sans text-lma-cream/80 text-lg md:text-xl lg:text-2xl leading-relaxed"
-              >
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Narrative + Featured Asset.
+            Grid flipped from 1.5fr / 1fr → 1fr / 1.1fr so the featured asset
+            (Fashion Nova autoplay video, Forever 21 Rolling Loud still, Sol /
+            Ivy editorials) carries more visual weight than the narrative
+            column on every tab. */}
+        <div className="grid gap-10 lg:gap-16 lg:grid-cols-[1fr_1.1fr] mb-12 md:mb-16">
+          {/* Narrative size is per-tab:
+              - Fashion Nova / Forever 21 ship long-form copy that already
+                fills the column → keep the original compact `text-sm md:text-base`.
+              - Ivy City / Sol de Janeiro ship shorter copy → bump up so the
+                column fills the empty space next to the featured asset. */}
+          {(() => {
+            const useLargeNarrative =
+              active.slug === "ivy-city" || active.slug === "sol-de-janeiro"
+            const sizeClass = useLargeNarrative
+              ? "text-base md:text-lg lg:text-xl"
+              : "text-sm md:text-base"
+            const spacingClass = useLargeNarrative
+              ? "space-y-6 md:space-y-7"
+              : "space-y-5 md:space-y-6"
+            return (
+              <div className={`${spacingClass} max-w-[640px]`}>
+                {active.narrative.map((para, i) => (
+                  <p
+                    key={i}
+                    className={`font-sans text-lma-cream/80 ${sizeClass} leading-relaxed`}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+            )
+          })()}
 
           {active.featuredEmbed ? (
             active.featuredEmbed.poster ? (
