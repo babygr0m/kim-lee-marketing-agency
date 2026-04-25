@@ -95,8 +95,9 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "https://www.youtube.com/watch?v=9N7WbMjozUk",
       },
     },
-    // Thumbnail order alternates portrait / landscape for visual rhythm:
-    // Alix (portrait) → Kimora (landscape) → Madison (portrait) → XO Kitty (landscape).
+    // All four thumbnails share the default 16:9 frame so the row stays
+    // uniform. Portrait stills (Alix, Madison) bias their crop to the top so
+    // faces stay in view; landscape stills (Kimora, XO Kitty) cover naturally.
     thumbnails: [
       {
         videoId: "EicIufb-VxE",
@@ -105,8 +106,6 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Alix Earle",
         secondaryLabel: "Juicy Couture",
         imageSrc: "/case-studies/f21-alix-earle.webp",
-        // Portrait frame — fills naturally without letterbox bars.
-        aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
       },
       {
@@ -124,8 +123,6 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Madison Beer",
         secondaryLabel: "Holiday",
         imageSrc: "/case-studies/f21-madison-beer.jpg",
-        // Portrait frame — keeps face + corset both in view.
-        aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
       },
       {
