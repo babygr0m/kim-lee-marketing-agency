@@ -5,10 +5,18 @@ import { AboutFounder } from "@/components/about/about-founder"
 import { AboutApproach } from "@/components/about/about-approach"
 import { AboutPodcast } from "@/components/about/about-podcast"
 import { AboutClosingCTA } from "@/components/about/about-closing-cta"
+import { AboutPageBg } from "@/components/about/about-page-bg"
 
 export default function AboutPage() {
+  // <main> intentionally has NO bg-lma-black — the fixed gradient layer
+  // (AboutPageBg) sits at -z-10 and provides the dark page base via its
+  // own #0A0A0A solid layer. Footer is rendered in transparent mode so
+  // the gradient reads through behind it. Same architecture as the
+  // /case-studies page.
   return (
-    <main className="bg-lma-black">
+    <main className="min-h-screen">
+      <AboutPageBg />
+
       <Header />
 
       <AboutHero />
@@ -30,7 +38,7 @@ export default function AboutPage() {
 
       <AboutClosingCTA />
 
-      <Footer />
+      <Footer transparent />
     </main>
   )
 }

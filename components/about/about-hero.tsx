@@ -1,6 +1,6 @@
 export function AboutHero() {
   return (
-    <section className="bg-lma-black px-6 pb-24 pt-40 md:px-12 md:pb-32 md:pt-48 lg:px-20 lg:pt-56">
+    <section className="px-6 pb-24 pt-40 md:px-12 md:pb-32 md:pt-48 lg:px-20 lg:pt-56">
       {/* Hero stagger reveal — eyebrow → headline → kicker → body. */}
       <div className="mx-auto max-w-4xl text-center">
         <p className="lma-reveal-eyebrow mb-6 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-lma-gold md:text-sm">

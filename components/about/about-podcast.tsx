@@ -7,7 +7,7 @@ export function AboutPodcast() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <section className="bg-lma-black px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
+    <section className="px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-5 md:gap-12 lg:gap-16 items-center">
           {/* Cover art — 2/5 col */}

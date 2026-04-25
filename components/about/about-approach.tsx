@@ -28,7 +28,7 @@ const steps = [
 
 export function AboutApproach() {
   return (
-    <section className="bg-lma-black px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
+    <section className="px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
       <div className="mx-auto max-w-6xl">
         {/* Intro */}
         <div className="mb-16 text-center md:mb-20">

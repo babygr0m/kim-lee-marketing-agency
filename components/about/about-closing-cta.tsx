@@ -7,7 +7,7 @@ export function AboutClosingCTA() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <section className="bg-lma-black px-6 py-24 md:py-32 lg:py-40">
+    <section className="px-6 py-24 md:py-32 lg:py-40">
       <div className="mx-auto max-w-3xl text-center">
         {/* Eyebrow */}
         <p className="mb-6 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-lma-gold md:text-sm">

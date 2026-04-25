@@ -245,6 +245,20 @@
   animation: cs-sol-de-janeiro-sweep 18s ease-in-out infinite;
 }
 
+/* About page — full-viewport ambient brand-gold radial drift. Same drift
+   path as the case study radial gradients (4-corner ease) but slowed to
+   24s so the motion is more meditative — the gradient is constant
+   atmosphere here, not a tab identity, so a longer cycle reads better. */
+@keyframes about-gold-drift {
+  0%, 100% { background-position: 0% 0%; }
+  25%      { background-position: 100% 0%; }
+  50%      { background-position: 100% 100%; }
+  75%      { background-position: 0% 100%; }
+}
+.animate-about-gold {
+  animation: about-gold-drift 24s ease-in-out infinite;
+}
+
 /* ---------------------------------------------------------------------------
  * Hero text reveal stagger — fires on first mount of every page hero.
  *
@@ -317,6 +331,7 @@
   .animate-cs-forever-21,
   .animate-cs-ivy-city,
   .animate-cs-sol-de-janeiro,
+  .animate-about-gold,
   .animate-logo-scroll {
     animation: none !important;
   }

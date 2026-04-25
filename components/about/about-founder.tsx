@@ -8,7 +8,7 @@ const founderStats = [
 
 export function AboutFounder() {
   return (
-    <section className="bg-lma-black px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
+    <section className="px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
       <div className="mx-auto max-w-7xl">
         {/* Two-column block */}
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-20 items-center">
