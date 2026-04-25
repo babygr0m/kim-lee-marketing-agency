@@ -87,6 +87,12 @@ const caseStudies: CaseStudyData[] = [
     featuredEmbed: {
       src: "https://www.youtube.com/embed/9N7WbMjozUk?autoplay=1&mute=1&loop=1&playlist=9N7WbMjozUk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1",
       title: "Forever 21 x Rolling Loud 2023",
+      // This video has embedding disabled on its source channel — render a
+      // clickable thumbnail-poster instead of an iframe.
+      poster: {
+        thumbnailSrc: "https://img.youtube.com/vi/9N7WbMjozUk/hqdefault.jpg",
+        watchHref: "https://www.youtube.com/watch?v=9N7WbMjozUk",
+      },
     },
     thumbnails: [
       {
@@ -95,6 +101,7 @@ const caseStudies: CaseStudyData[] = [
         alt: "Forever 21 x Juicy Couture featuring Alix Earle",
         primaryLabel: "Alix Earle",
         secondaryLabel: "Juicy Couture",
+        directSrc: "https://img.youtube.com/vi/EicIufb-VxE/hqdefault.jpg",
       },
       {
         videoId: "bevSPXctLNA",
@@ -102,6 +109,7 @@ const caseStudies: CaseStudyData[] = [
         alt: "Forever 21 Holiday Party Collection featuring Madison Beer",
         primaryLabel: "Madison Beer",
         secondaryLabel: "Holiday",
+        directSrc: "https://img.youtube.com/vi/bevSPXctLNA/hqdefault.jpg",
       },
       {
         videoId: "SWuz2CRqoZ8",
@@ -109,6 +117,7 @@ const caseStudies: CaseStudyData[] = [
         alt: "Forever 21 Holidays with Baby Phat featuring Kimora Lee Simmons",
         primaryLabel: "Kimora",
         secondaryLabel: "Baby Phat",
+        directSrc: "https://img.youtube.com/vi/SWuz2CRqoZ8/hqdefault.jpg",
       },
       {
         videoId: "C6t9M6IUO-c",
@@ -116,10 +125,11 @@ const caseStudies: CaseStudyData[] = [
         alt: "Forever 21 x Hello Kitty x Sanrio XO Kitty",
         primaryLabel: "XO Kitty",
         secondaryLabel: "Hello Kitty",
+        directSrc: "https://img.youtube.com/vi/C6t9M6IUO-c/hqdefault.jpg",
       },
     ],
     archiveLink: {
-      href: "https://www.instagram.com/p/Cr1BwMEOlyc/",
+      href: "https://www.instagram.com/forever21/",
       label: "View campaign archive on Instagram",
     },
   },

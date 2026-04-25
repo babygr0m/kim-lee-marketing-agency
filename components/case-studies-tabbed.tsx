@@ -7,6 +7,15 @@ import { YouTubeThumbnail } from "@/components/youtube-thumbnail"
 export type CaseStudyEmbed = {
   src: string
   title: string
+  /**
+   * When provided, the featured asset renders a clickable thumbnail-poster
+   * (linking out to YouTube) instead of an inline iframe. Used for videos
+   * whose channels block embedding.
+   */
+  poster?: {
+    thumbnailSrc: string
+    watchHref: string
+  }
 }
 
 export type CaseStudyThumbnail = {
@@ -15,6 +24,8 @@ export type CaseStudyThumbnail = {
   alt: string
   primaryLabel: string
   secondaryLabel: string
+  /** Optional direct URL — skips the maxres → hqdefault fallback. */
+  directSrc?: string
 }
 
 export type CaseStudyArchiveLink = {
@@ -203,21 +214,70 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           </div>
 
           {active.featuredEmbed ? (
-            <div
-              className="relative w-full overflow-hidden border border-lma-cream/10"
-              style={{ aspectRatio: "16 / 9" }}
-            >
-              <iframe
-                src={active.featuredEmbed.src}
-                title={active.featuredEmbed.title}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-                aria-hidden="true"
-                tabIndex={-1}
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                style={{ border: 0 }}
-              />
-            </div>
+            active.featuredEmbed.poster ? (
+              <a
+                href={active.featuredEmbed.poster.watchHref}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Watch ${active.featuredEmbed.title} on YouTube`}
+                className="group relative block w-full overflow-hidden border border-lma-cream/10 transition-transform duration-200 ease-out hover:scale-[1.01]"
+                style={{ aspectRatio: "16 / 9" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={active.featuredEmbed.poster.thumbnailSrc || "/placeholder.svg"}
+                  alt={active.featuredEmbed.title}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span
+                    className="flex h-20 w-20 items-center justify-center rounded-full border border-lma-gold transition-colors duration-200 ease-out"
+                    style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      className="h-7 w-7 ml-1 text-lma-gold transition-colors duration-200 ease-out group-hover:text-lma-black"
+                      fill="currentColor"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                </span>
+                {/* Hover state: gold solid background on the play button */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+                >
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-lma-gold bg-lma-gold">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-7 w-7 ml-1 text-lma-black"
+                      fill="currentColor"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                </span>
+              </a>
+            ) : (
+              <div
+                className="relative w-full overflow-hidden border border-lma-cream/10"
+                style={{ aspectRatio: "16 / 9" }}
+              >
+                <iframe
+                  src={active.featuredEmbed.src}
+                  title={active.featuredEmbed.title}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{ border: 0 }}
+                />
+              </div>
+            )
           ) : (
             <div className="relative aspect-[4/5] bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -245,6 +305,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                   alt={thumb.alt}
                   primaryLabel={thumb.primaryLabel}
                   secondaryLabel={thumb.secondaryLabel}
+                  directSrc={thumb.directSrc}
                 />
               ))
             : [1, 2, 3, 4].map((n) => (

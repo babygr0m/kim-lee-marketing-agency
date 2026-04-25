@@ -8,6 +8,12 @@ type YouTubeThumbnailProps = {
   alt: string
   primaryLabel: string
   secondaryLabel: string
+  /**
+   * When provided, this exact URL is used for the poster image and the
+   * maxresdefault → hqdefault fallback is skipped entirely. Useful for videos
+   * that don't have a maxresdefault.jpg generated.
+   */
+  directSrc?: string
 }
 
 export function YouTubeThumbnail({
@@ -16,12 +22,14 @@ export function YouTubeThumbnail({
   alt,
   primaryLabel,
   secondaryLabel,
+  directSrc,
 }: YouTubeThumbnailProps) {
-  // Try maxresdefault first, fall back to hqdefault on error
+  // If a direct URL is supplied, use it as-is (skip maxres entirely).
+  // Otherwise try maxresdefault first and fall back to hqdefault on error.
   const [src, setSrc] = useState(
-    `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+    directSrc ?? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
   )
-  const [hasFallenBack, setHasFallenBack] = useState(false)
+  const [hasFallenBack, setHasFallenBack] = useState(Boolean(directSrc))
 
   return (
     <a
