@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react"
 import { useSearchParams } from "next/navigation"
-import { ArrowRight, Check, Plus, X } from "lucide-react"
+import { ArrowRight, Plus, X } from "lucide-react"
 
 const SERVICE_OPTIONS = [
   { value: "not-sure", label: "Not sure yet — let's discuss" },
@@ -48,13 +48,12 @@ const fieldClass =
 
 const Required = () => <span className="text-lma-gold">*</span>
 
-export function ContactForm() {
+export function ContactForm({ onSubmitted }: { onSubmitted: () => void }) {
   const searchParams = useSearchParams()
   const [serviceValue, setServiceValue] = useState<string>("not-sure")
   const [socials, setSocials] = useState<
     { id: number; platform: (typeof SOCIAL_PLATFORMS)[number]["value"]; handle: string }[]
   >([{ id: 0, platform: "instagram", handle: "" }])
-  const [submitted, setSubmitted] = useState(false)
 
   const addSocial = () => {
     // Suggest the next un-used platform if available, otherwise default to "other"
@@ -104,35 +103,11 @@ export function ContactForm() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // UI behavior only — API wiring lands in a follow-up
-    setSubmitted(true)
-  }
-
-  if (submitted) {
-    return (
-      <div className="border border-lma-cream/15 px-8 py-16 md:py-20 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 border border-lma-gold mb-8">
-          <Check className="w-7 h-7 text-lma-gold" strokeWidth={2} />
-        </div>
-        <h3 className="font-[family-name:var(--font-anton)] text-lma-cream uppercase tracking-tight leading-[0.95] text-3xl md:text-5xl mb-4">
-          Message received.
-        </h3>
-        <p className="font-[family-name:var(--font-instrument-serif)] italic text-lma-gold text-lg md:text-2xl mb-6">
-          We&apos;ll be in touch within 48 hours.
-        </p>
-        <p className="mx-auto max-w-[480px] font-sans text-sm md:text-base text-lma-cream/70 leading-relaxed">
-          In the meantime, you can also book a strategy call directly using the
-          calendar.
-        </p>
-      </div>
-    )
+    onSubmitted()
   }
 
   return (
     <>
-      <p className="mb-8 md:mb-10 font-sans text-[10px] md:text-xs uppercase tracking-[0.25em] text-lma-gold font-semibold">
-        Send us a message
-      </p>
-
       <form onSubmit={handleSubmit} className="flex flex-col gap-7 md:gap-8">
         {/* Name */}
         <div>

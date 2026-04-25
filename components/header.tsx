@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ]
 
 export function Header() {
@@ -80,18 +79,24 @@ export function Header() {
             {/* Divider */}
             <div className="h-4 w-px bg-lma-cream/20" />
 
-            {/* CTA Button */}
+            {/* CTA Button — single contact entry point */}
             <a
               href="/contact"
               onMouseEnter={() => setIsCtaHovered(true)}
               onMouseLeave={() => setIsCtaHovered(false)}
-              className="group flex items-center gap-2 border border-lma-cream/60 px-5 py-2.5 font-sans text-xs uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
+              className={`group flex items-center gap-2 border px-7 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 ${
+                pathname === "/contact"
+                  ? "border-lma-cream bg-lma-cream text-lma-black"
+                  : "border-lma-cream/80 text-lma-cream hover:bg-lma-cream hover:text-lma-black"
+              }`}
             >
-              Book a call
+              Contact
               <ArrowRight
                 className={`h-3.5 w-3.5 transition-transform duration-300 ${
-                  isCtaHovered ? "translate-x-1" : "translate-x-0"
-                }`}
+                  pathname === "/contact"
+                    ? "text-lma-black"
+                    : "text-lma-gold group-hover:text-lma-black"
+                } ${isCtaHovered ? "translate-x-1" : "translate-x-0"}`}
               />
             </a>
           </div>
@@ -138,14 +143,22 @@ export function Header() {
             })}
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA Button — single contact entry point */}
           <a
             href="/contact"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-12 flex items-center gap-3 border border-lma-cream/60 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] text-lma-cream transition-colors duration-200 hover:border-lma-gold hover:text-lma-gold"
+            className={`mt-12 flex items-center gap-3 border px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-200 ${
+              pathname === "/contact"
+                ? "border-lma-cream bg-lma-cream text-lma-black"
+                : "border-lma-cream/80 text-lma-cream hover:bg-lma-cream hover:text-lma-black"
+            }`}
           >
-            Book a call
-            <ArrowRight className="h-4 w-4" />
+            Contact
+            <ArrowRight
+              className={`h-4 w-4 ${
+                pathname === "/contact" ? "text-lma-black" : "text-lma-gold"
+              }`}
+            />
           </a>
         </div>
       )}
