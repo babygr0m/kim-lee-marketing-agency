@@ -95,9 +95,10 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "https://www.youtube.com/watch?v=9N7WbMjozUk",
       },
     },
-    // All four thumbnails share the default 16:9 frame so the row stays
-    // uniform. Portrait stills (Alix, Madison) bias their crop to the top so
-    // faces stay in view; landscape stills (Kimora, XO Kitty) cover naturally.
+    // All four thumbnails share a tall portrait (3:4) frame for a uniform
+    // row. Portrait stills (Alix, Madison) fit naturally without cropping
+    // their faces; landscape stills (Kimora, XO Kitty) cover the frame and
+    // crop horizontally — `objectPosition` keeps the key subject in view.
     thumbnails: [
       {
         videoId: "EicIufb-VxE",
@@ -106,6 +107,7 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Alix Earle",
         secondaryLabel: "Juicy Couture",
         imageSrc: "/case-studies/f21-alix-earle.webp",
+        aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
       },
       {
@@ -115,6 +117,10 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Kimora",
         secondaryLabel: "Baby Phat",
         imageSrc: "/case-studies/f21-kimora.jpeg",
+        aspectClass: "aspect-[3/4]",
+        // Kimora is centered in the original — keep her in frame as the row
+        // narrows.
+        objectPosition: "center",
       },
       {
         videoId: "bevSPXctLNA",
@@ -123,6 +129,7 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Madison Beer",
         secondaryLabel: "Holiday",
         imageSrc: "/case-studies/f21-madison-beer.jpg",
+        aspectClass: "aspect-[3/4]",
         objectPosition: "center top",
       },
       {
@@ -132,6 +139,10 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "XO Kitty",
         secondaryLabel: "Hello Kitty",
         imageSrc: "/case-studies/f21-xo-kitty.webp",
+        aspectClass: "aspect-[3/4]",
+        // The Hello Kitty signage sits left, mascot sits right — center
+        // crop keeps both partially visible inside the narrower frame.
+        objectPosition: "center",
       },
     ],
     archiveLink: {
