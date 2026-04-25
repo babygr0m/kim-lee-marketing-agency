@@ -19,19 +19,21 @@ export function FeaturedCaseStudy() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Left Column - Video (55%) */}
           <div className="lg:w-[55%]">
-            <div className="relative aspect-[3/4] overflow-hidden">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source 
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0417%20%281%29-7rSg6VOcU2z1Sfc7Ku5CYLrYAmAc8j.mp4" 
-                  type="video/mp4" 
-                />
-              </video>
+            {/* Decorative autoplay-loop hero — full video lives on /case-studies */}
+            <div
+              className="relative w-full overflow-hidden border border-lma-cream/10"
+              style={{ aspectRatio: "16 / 9" }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/7hXhsXrlDhE?autoplay=1&mute=1&loop=1&playlist=7hXhsXrlDhE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                title="Cardi B x Fashion Nova"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                aria-hidden="true"
+                tabIndex={-1}
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ border: 0 }}
+              />
             </div>
           </div>
 

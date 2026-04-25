@@ -2,6 +2,20 @@
 
 import { useState, useRef, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { YouTubeThumbnail } from "@/components/youtube-thumbnail"
+
+export type CaseStudyEmbed = {
+  src: string
+  title: string
+}
+
+export type CaseStudyThumbnail = {
+  videoId: string
+  href: string
+  alt: string
+  primaryLabel: string
+  secondaryLabel: string
+}
 
 export type CaseStudyData = {
   slug: string
@@ -12,6 +26,8 @@ export type CaseStudyData = {
   metrics: { value: string; label: string }[]
   narrative: string[]
   collaborators: string[]
+  featuredEmbed?: CaseStudyEmbed
+  thumbnails?: CaseStudyThumbnail[]
 }
 
 export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[] }) {
@@ -180,34 +196,63 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
             ))}
           </div>
 
-          <div className="relative aspect-[4/5] bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6">
-                <span className="font-[family-name:var(--font-anton)] text-lma-cream/10 text-7xl md:text-9xl tracking-tight block leading-none">
-                  {String(activeIndex + 1).padStart(2, "0")}
-                </span>
-                <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-lma-cream/30 mt-3 block">
-                  {active.shortLabel}-Featured
-                </span>
+          {active.featuredEmbed ? (
+            <div
+              className="relative w-full overflow-hidden border border-lma-cream/10"
+              style={{ aspectRatio: "16 / 9" }}
+            >
+              <iframe
+                src={active.featuredEmbed.src}
+                title={active.featuredEmbed.title}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                aria-hidden="true"
+                tabIndex={-1}
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ border: 0 }}
+              />
+            </div>
+          ) : (
+            <div className="relative aspect-[4/5] bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center px-6">
+                  <span className="font-[family-name:var(--font-anton)] text-lma-cream/10 text-7xl md:text-9xl tracking-tight block leading-none">
+                    {String(activeIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-lma-cream/30 mt-3 block">
+                    {active.shortLabel}-Featured
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Thumbnail Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-12 md:mb-16">
-          {[1, 2, 3, 4].map((n) => (
-            <div
-              key={n}
-              className="relative aspect-video bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-sans text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-lma-cream/30">
-                  {active.shortLabel.split(" ")[0]}-CAMPAIGN-0{n}
-                </span>
-              </div>
-            </div>
-          ))}
+          {active.thumbnails && active.thumbnails.length > 0
+            ? active.thumbnails.map((thumb) => (
+                <YouTubeThumbnail
+                  key={thumb.videoId}
+                  videoId={thumb.videoId}
+                  href={thumb.href}
+                  alt={thumb.alt}
+                  primaryLabel={thumb.primaryLabel}
+                  secondaryLabel={thumb.secondaryLabel}
+                />
+              ))
+            : [1, 2, 3, 4].map((n) => (
+                <div
+                  key={n}
+                  className="relative aspect-video bg-lma-cream/[0.03] border border-lma-cream/[0.08] overflow-hidden"
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-sans text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-lma-cream/30">
+                      {active.shortLabel.split(" ")[0]}-CAMPAIGN-0{n}
+                    </span>
+                  </div>
+                </div>
+              ))}
         </div>
 
         {/* Collaborators Strip */}

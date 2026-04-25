@@ -26,6 +26,40 @@ const caseStudies: CaseStudyData[] = [
       "Facilitated every major celebrity campaign: sourcing talent, managing negotiations and contracts, coordinating editorial shoots, and spearheading brand events and music, TV, and film placements. Grew a following of millions, generated billions of impressions, and created hundreds of viral moments over eight years at the helm.",
     ],
     collaborators: ["Cardi B", "Megan Thee Stallion", "Amber Rose", "Cassie"],
+    featuredEmbed: {
+      src: "https://www.youtube.com/embed/RIUt8pmKMoY?autoplay=1&mute=1&loop=1&playlist=RIUt8pmKMoY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1",
+      title: "Megan Thee Stallion x Fashion Nova",
+    },
+    thumbnails: [
+      {
+        videoId: "7hXhsXrlDhE",
+        href: "https://www.youtube.com/watch?v=7hXhsXrlDhE",
+        alt: "Cardi B x Fashion Nova editorial campaign",
+        primaryLabel: "Cardi B",
+        secondaryLabel: "Editorial",
+      },
+      {
+        videoId: "RIUt8pmKMoY",
+        href: "https://www.youtube.com/watch?v=RIUt8pmKMoY",
+        alt: "Megan Thee Stallion x Fashion Nova",
+        primaryLabel: "Megan Thee Stallion",
+        secondaryLabel: "Campaign",
+      },
+      {
+        videoId: "tLbMDAu16BM",
+        href: "https://www.youtube.com/watch?v=tLbMDAu16BM",
+        alt: "Amber Rose x Fashion Nova editorial",
+        primaryLabel: "Amber Rose",
+        secondaryLabel: "Editorial",
+      },
+      {
+        videoId: "7wtQYjtn9S0",
+        href: "https://www.youtube.com/watch?v=7wtQYjtn9S0",
+        alt: "Cassie x Fashion Nova",
+        primaryLabel: "Cassie",
+        secondaryLabel: "Campaign",
+      },
+    ],
   },
   {
     slug: "forever-21",
