@@ -24,12 +24,13 @@ const imageMap: Record<
   string,
   { src: string; alt: string; objectPosition?: string }
 > = {
-  // Service 03 — Megan Thee Stallion / Fashion Nova. Sourced from the
-  // YouTube CDN until the local influencer.jpg is uploaded.
+  // Service 03 — Megan Thee Stallion x Fashion Nova Pets campaign still.
+  // Subject is centered horizontally in the source — bias crop slightly
+  // upward so her face stays in the 4:5 portrait frame.
   influencer: {
-    src: "https://img.youtube.com/vi/RIUt8pmKMoY/maxresdefault.jpg",
+    src: "/influencer.jpg",
     alt: "Megan Thee Stallion x Fashion Nova Pets — influencer marketing campaign",
-    objectPosition: "center",
+    objectPosition: "center top",
   },
   // Service 05 — Madison Beer holiday still from F21 case study.
   creative: {
