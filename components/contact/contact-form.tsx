@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react"
 import { useSearchParams } from "next/navigation"
-import { ArrowRight, Check } from "lucide-react"
+import { ArrowRight, Check, Plus, X } from "lucide-react"
 
 const SERVICE_OPTIONS = [
   { value: "not-sure", label: "Not sure yet — let's discuss" },
@@ -51,11 +51,45 @@ const Required = () => <span className="text-lma-gold">*</span>
 export function ContactForm() {
   const searchParams = useSearchParams()
   const [serviceValue, setServiceValue] = useState<string>("not-sure")
-  const [socialPlatform, setSocialPlatform] =
-    useState<(typeof SOCIAL_PLATFORMS)[number]["value"]>("instagram")
+  const [socials, setSocials] = useState<
+    { id: number; platform: (typeof SOCIAL_PLATFORMS)[number]["value"]; handle: string }[]
+  >([{ id: 0, platform: "instagram", handle: "" }])
   const [submitted, setSubmitted] = useState(false)
 
-  const activePlatform = SOCIAL_PLATFORMS.find((p) => p.value === socialPlatform)
+  const addSocial = () => {
+    // Suggest the next un-used platform if available, otherwise default to "other"
+    const used = new Set(socials.map((s) => s.platform))
+    const next =
+      SOCIAL_PLATFORMS.find((p) => !used.has(p.value))?.value ?? "other"
+    setSocials((prev) => [
+      ...prev,
+      { id: Date.now() + Math.random(), platform: next, handle: "" },
+    ])
+  }
+
+  const removeSocial = (id: number) => {
+    setSocials((prev) => (prev.length === 1 ? prev : prev.filter((s) => s.id !== id)))
+  }
+
+  const updateSocial = (
+    id: number,
+    field: "platform" | "handle",
+    value: string,
+  ) => {
+    setSocials((prev) =>
+      prev.map((s) =>
+        s.id === id
+          ? {
+              ...s,
+              [field]:
+                field === "platform"
+                  ? (value as (typeof SOCIAL_PLATFORMS)[number]["value"])
+                  : value,
+            }
+          : s,
+      ),
+    )
+  }
 
   // Pre-fill from ?service= query param
   useEffect(() => {
@@ -159,61 +193,106 @@ export function ContactForm() {
           />
         </div>
 
-        {/* Primary social channel */}
+        {/* Social channels — dynamic list */}
         <div>
-          <label htmlFor="social-handle" className={labelClass}>
-            Primary social channel
-          </label>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="sm:w-[42%] relative">
-              <select
-                id="social-platform"
-                name="socialPlatform"
-                value={socialPlatform}
-                onChange={(e) =>
-                  setSocialPlatform(
-                    e.target.value as (typeof SOCIAL_PLATFORMS)[number]["value"],
-                  )
-                }
-                className={`${fieldClass} appearance-none cursor-pointer pr-10`}
-                aria-label="Social platform"
-              >
-                {SOCIAL_PLATFORMS.map((opt) => (
-                  <option
-                    key={opt.value}
-                    value={opt.value}
-                    className="bg-lma-black text-lma-cream"
-                  >
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 12 8"
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-2 text-lma-gold"
-              >
-                <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="square" />
-              </svg>
-            </div>
-            <div className="sm:flex-1 flex items-stretch border border-lma-cream/15 focus-within:border-lma-gold transition-colors">
-              {activePlatform?.prefix && (
-                <span className="flex items-center px-4 font-mono text-sm text-lma-gold border-r border-lma-cream/15 select-none">
-                  {activePlatform.prefix}
-                </span>
-              )}
-              <input
-                id="social-handle"
-                name="socialHandle"
-                type="text"
-                placeholder={
-                  activePlatform?.prefix
-                    ? "yourbrand"
-                    : "Profile URL or handle"
-                }
-                className="flex-1 bg-transparent text-lma-cream placeholder:text-lma-cream/30 px-4 py-3.5 font-sans text-sm md:text-base focus:outline-none"
-              />
-            </div>
+          <label className={labelClass}>Social channels</label>
+
+          <div className="flex flex-col gap-3">
+            {socials.map((row, index) => {
+              const platform = SOCIAL_PLATFORMS.find((p) => p.value === row.platform)
+              const canRemove = socials.length > 1
+              return (
+                <div
+                  key={row.id}
+                  className="flex flex-col sm:flex-row gap-3 items-stretch"
+                >
+                  {/* Platform select */}
+                  <div className="sm:w-[42%] relative">
+                    <select
+                      name={`socialPlatform-${index}`}
+                      value={row.platform}
+                      onChange={(e) =>
+                        updateSocial(row.id, "platform", e.target.value)
+                      }
+                      className={`${fieldClass} appearance-none cursor-pointer pr-10`}
+                      aria-label={`Social platform ${index + 1}`}
+                    >
+                      {SOCIAL_PLATFORMS.map((opt) => (
+                        <option
+                          key={opt.value}
+                          value={opt.value}
+                          className="bg-lma-black text-lma-cream"
+                        >
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 12 8"
+                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-2 text-lma-gold"
+                    >
+                      <path
+                        d="M1 1l5 5 5-5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="square"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Handle input + optional remove */}
+                  <div className="sm:flex-1 flex gap-3">
+                    <div className="flex-1 flex items-stretch border border-lma-cream/15 focus-within:border-lma-gold transition-colors">
+                      {platform?.prefix && (
+                        <span className="flex items-center px-4 font-mono text-sm text-lma-gold border-r border-lma-cream/15 select-none">
+                          {platform.prefix}
+                        </span>
+                      )}
+                      <input
+                        name={`socialHandle-${index}`}
+                        type="text"
+                        value={row.handle}
+                        onChange={(e) =>
+                          updateSocial(row.id, "handle", e.target.value)
+                        }
+                        placeholder={
+                          platform?.prefix
+                            ? "yourbrand"
+                            : "Profile URL or handle"
+                        }
+                        aria-label={`${platform?.label ?? "Social"} handle`}
+                        className="flex-1 bg-transparent text-lma-cream placeholder:text-lma-cream/30 px-4 py-3.5 font-sans text-sm md:text-base focus:outline-none"
+                      />
+                    </div>
+
+                    {canRemove && (
+                      <button
+                        type="button"
+                        onClick={() => removeSocial(row.id)}
+                        aria-label={`Remove ${platform?.label ?? "social"} channel`}
+                        className="shrink-0 flex items-center justify-center w-12 border border-lma-cream/15 text-lma-cream/60 hover:text-lma-gold hover:border-lma-gold transition-colors"
+                      >
+                        <X className="w-4 h-4" strokeWidth={1.5} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+
+            {/* Add another channel */}
+            <button
+              type="button"
+              onClick={addSocial}
+              className="group mt-1 inline-flex items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.15em] text-lma-cream/70 hover:text-lma-gold transition-colors"
+            >
+              <span className="flex items-center justify-center w-6 h-6 border border-lma-cream/40 group-hover:border-lma-gold transition-colors">
+                <Plus className="w-3 h-3" strokeWidth={2} />
+              </span>
+              Add another channel
+            </button>
           </div>
         </div>
 
