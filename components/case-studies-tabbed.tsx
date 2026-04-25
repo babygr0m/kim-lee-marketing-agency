@@ -8,13 +8,15 @@ export type CaseStudyEmbed = {
   src: string
   title: string
   /**
-   * When provided, the featured asset renders a clickable thumbnail-poster
-   * (linking out to YouTube) instead of an inline iframe. Used for videos
-   * whose channels block embedding.
+   * When provided, the featured asset renders as a static press still rather
+   * than an inline iframe. Treated as display-only (no link), so callers
+   * shouldn't rely on `watchHref` being clickable from the UI.
    */
   poster?: {
     thumbnailSrc: string
     watchHref: string
+    /** Defaults to "cover". Use "contain" for portrait/full-frame stills. */
+    objectFit?: "cover" | "contain"
   }
 }
 
@@ -27,11 +29,15 @@ export type CaseStudyThumbnail = {
   /** Optional direct URL — skips the maxres → hqdefault fallback. */
   directSrc?: string
   /**
-   * When provided, the thumbnail renders as a plain <img> anchor using this
-   * local/static image path instead of routing through YouTubeThumbnail.
-   * Used for case studies whose press imagery isn't sourced from YouTube.
+   * When provided, the thumbnail renders a plain <img> using this local
+   * /static path instead of routing through YouTubeThumbnail. Treated as
+   * display-only (no link).
    */
   imageSrc?: string
+  /** Defaults to "cover". Use "contain" for portrait stills that get clipped. */
+  objectFit?: "cover" | "contain"
+  /** Defaults to "center". Pass e.g. "top" to bias the crop. */
+  objectPosition?: string
 }
 
 export type CaseStudyArchiveLink = {
@@ -221,12 +227,8 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
           {active.featuredEmbed ? (
             active.featuredEmbed.poster ? (
-              <a
-                href={active.featuredEmbed.poster.watchHref}
-                target="_blank"
-                rel="noopener"
-                aria-label={`Watch ${active.featuredEmbed.title} on YouTube`}
-                className="group relative block w-full overflow-hidden border border-lma-cream/10 transition-transform duration-200 ease-out hover:scale-[1.01]"
+              <div
+                className="relative block w-full overflow-hidden border border-lma-cream/10 bg-lma-black"
                 style={{ aspectRatio: "16 / 9" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -234,39 +236,13 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                   src={active.featuredEmbed.poster.thumbnailSrc || "/placeholder.svg"}
                   alt={active.featuredEmbed.title}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    objectFit: active.featuredEmbed.poster.objectFit ?? "cover",
+                    objectPosition: "center",
+                  }}
                 />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="flex h-20 w-20 items-center justify-center rounded-full border border-lma-gold transition-colors duration-200 ease-out"
-                    style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      className="h-7 w-7 ml-1 text-lma-gold transition-colors duration-200 ease-out group-hover:text-lma-black"
-                      fill="currentColor"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                </span>
-                {/* Hover state: gold solid background on the play button */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
-                >
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-lma-gold bg-lma-gold">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-7 w-7 ml-1 text-lma-black"
-                      fill="currentColor"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                </span>
-              </a>
+              </div>
             ) : (
               <div
                 className="relative w-full overflow-hidden border border-lma-cream/10"
@@ -305,28 +281,25 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
           {active.thumbnails && active.thumbnails.length > 0
             ? active.thumbnails.map((thumb) =>
                 thumb.imageSrc ? (
-                  <a
-                    key={thumb.videoId}
-                    href={thumb.href}
-                    target="_blank"
-                    rel="noopener"
-                    aria-label={thumb.alt}
-                    className="group block transition-transform duration-200 ease-out hover:scale-[1.02]"
-                  >
-                    <div className="relative aspect-video overflow-hidden border border-lma-cream/10 transition-colors duration-200 ease-out group-hover:border-lma-gold">
+                  <div key={thumb.videoId} className="block">
+                    <div className="relative aspect-video overflow-hidden border border-lma-cream/10 bg-lma-black">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={thumb.imageSrc || "/placeholder.svg"}
                         alt={thumb.alt}
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover object-center"
+                        className="absolute inset-0 w-full h-full"
+                        style={{
+                          objectFit: thumb.objectFit ?? "cover",
+                          objectPosition: thumb.objectPosition ?? "center",
+                        }}
                       />
                     </div>
                     <p className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase">
                       <span className="text-lma-gold">{thumb.primaryLabel}</span>
                       <span className="text-lma-cream/60"> / {thumb.secondaryLabel}</span>
                     </p>
-                  </a>
+                  </div>
                 ) : (
                   <YouTubeThumbnail
                     key={thumb.videoId}

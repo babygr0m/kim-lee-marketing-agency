@@ -85,13 +85,14 @@ const caseStudies: CaseStudyData[] = [
       "Barbie",
     ],
     featuredEmbed: {
-      // Rendered as a clickable static-image poster (no iframe) — uses a
-      // local press still rather than a YouTube CDN thumbnail.
+      // Rendered as a static press still (display-only, non-clickable).
       src: "https://www.youtube.com/watch?v=9N7WbMjozUk",
       title: "Forever 21 x Rolling Loud 2023",
       poster: {
         thumbnailSrc: "/case-studies/f21-rolling-loud-featured.jpg",
         watchHref: "https://www.youtube.com/watch?v=9N7WbMjozUk",
+        // Show the entire heart-frame portrait without cropping.
+        objectFit: "contain",
       },
     },
     thumbnails: [
@@ -102,6 +103,8 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Alix Earle",
         secondaryLabel: "Juicy Couture",
         imageSrc: "/case-studies/f21-alix-earle.webp",
+        // Portrait still — letterbox so face + Juicy bag are both visible.
+        objectFit: "contain",
       },
       {
         videoId: "bevSPXctLNA",
@@ -110,6 +113,8 @@ const caseStudies: CaseStudyData[] = [
         primaryLabel: "Madison Beer",
         secondaryLabel: "Holiday",
         imageSrc: "/case-studies/f21-madison-beer.jpg",
+        // Portrait still — letterbox so her face is in frame, not just dress.
+        objectFit: "contain",
       },
       {
         videoId: "SWuz2CRqoZ8",
