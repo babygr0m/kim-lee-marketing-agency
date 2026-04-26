@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowRight, Menu, X } from "lucide-react"
 
@@ -53,15 +54,16 @@ export function Header() {
         }`}
       >
         <div className="flex items-center justify-between px-6 py-6 md:px-12">
-          {/* Left - Wordmark */}
-          <a href="/" className="flex items-center gap-4">
+          {/* Left - Wordmark — Next.js <Link> for client-side routing
+              (native <a> would force a full page reload on every nav). */}
+          <Link href="/" className="flex items-center gap-4">
             <span className="font-[family-name:var(--font-anton)] text-lma-cream text-2xl tracking-tight">
               LMA
             </span>
             <span className="hidden sm:block font-sans text-[10px] uppercase tracking-[0.2em] text-lma-cream/50 leading-none">
               Lee Marketing Agency
             </span>
-          </a>
+          </Link>
 
           {/* Right - Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
@@ -69,7 +71,7 @@ export function Header() {
               {navLinks.map((link) => {
                 const isActive = pathname === link.href
                 return (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     className={`font-sans text-xs uppercase tracking-[0.15em] transition-colors duration-200 hover:text-lma-gold ${
@@ -77,7 +79,7 @@ export function Header() {
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               })}
             </nav>
@@ -85,8 +87,11 @@ export function Header() {
             {/* Divider */}
             <div className="h-4 w-px bg-lma-cream/20" />
 
-            {/* CTA Button — single contact entry point */}
-            <a
+            {/* CTA Button — single contact entry point.
+                Uses Next.js <Link> so the click triggers proper client-side
+                routing instead of a hard page reload (the previous native
+                <a> sometimes appeared not to navigate at all). */}
+            <Link
               href="/contact"
               onMouseEnter={() => setIsCtaHovered(true)}
               onMouseLeave={() => setIsCtaHovered(false)}
@@ -104,7 +109,7 @@ export function Header() {
                     : "text-lma-gold group-hover:text-lma-black"
                 } ${isCtaHovered ? "translate-x-1" : "translate-x-0"}`}
               />
-            </a>
+            </Link>
           </div>
 
           {/* Right - Mobile Hamburger */}
@@ -135,7 +140,7 @@ export function Header() {
             {navLinks.map((link) => {
               const isActive = pathname === link.href
               return (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -144,13 +149,13 @@ export function Header() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               )
             })}
           </nav>
 
           {/* CTA Button — single contact entry point */}
-          <a
+          <Link
             href="/contact"
             onClick={() => setIsMobileMenuOpen(false)}
             className={`mt-12 flex items-center gap-3 border px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-200 ${
@@ -165,7 +170,7 @@ export function Header() {
                 pathname === "/contact" ? "text-lma-black" : "text-lma-gold"
               }`}
             />
-          </a>
+          </Link>
         </div>
       )}
     </>

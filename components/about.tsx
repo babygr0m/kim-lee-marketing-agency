@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { AnimatedStat } from "@/components/animated-stat"
@@ -159,7 +160,7 @@ export function About() {
               style={{ transitionDelay: "500ms" }}
               className="mt-8 md:mt-12"
             >
-              <a
+              <Link
                 href="/about"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -171,7 +172,7 @@ export function About() {
                     isHovered ? "translate-x-1" : "translate-x-0"
                   }`}
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

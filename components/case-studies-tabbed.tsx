@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { YouTubeThumbnail } from "@/components/youtube-thumbnail"
@@ -489,11 +490,11 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
 
         {/* CTA + Prev/Next */}
         <div className="flex flex-wrap items-center gap-6 md:gap-8">
-          <a
+          <Link
             href={active.ctaHref ?? "/contact?service=affiliate-marketing"}
             onMouseEnter={() => setIsCtaHovered(true)}
             onMouseLeave={() => setIsCtaHovered(false)}
-            className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
+            className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
           >
             Work with us
             <ArrowRight
@@ -501,7 +502,7 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                 isCtaHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />
-          </a>
+          </Link>
 
           <div className="flex items-center gap-2 ml-auto">
             <button
@@ -538,13 +539,13 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
             cream outline + gold arrow → cream fill + black text/arrow on
             hover. (Was previously gold-outline / gold-fill — replaced for
             visual consistency with every other primary CTA on the site.) */}
-        <a
+        <Link
           href="/contact"
           className="group inline-flex items-center gap-3 border border-lma-cream/80 px-8 py-4 font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
         >
           Book a strategy call
           <ArrowRight className="w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        </Link>
       </div>
     </section>
   )

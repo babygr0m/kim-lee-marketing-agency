@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 
@@ -22,7 +23,7 @@ export function ServicesCTA() {
         {/* CTA Button — standardized to the canonical nav-bar pattern:
             cream outline + gold arrow → cream fill + black text/arrow
             on hover. */}
-        <a
+        <Link
           href="/contact"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -34,7 +35,7 @@ export function ServicesCTA() {
               isHovered ? "translate-x-1" : "translate-x-0"
             }`}
           />
-        </a>
+        </Link>
       </div>
     </section>
   )

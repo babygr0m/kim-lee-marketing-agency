@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { AnimatedStat } from "@/components/animated-stat"
@@ -163,11 +164,11 @@ export function FeaturedCaseStudy() {
               style={{ transitionDelay: `${REVEAL_DELAYS_MS.cta}ms` }}
               className="self-start"
             >
-              <a
+              <Link
                 href="/case-studies#fashion-nova"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
+                className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
               >
                 Read the full story
                 <ArrowRight
@@ -175,7 +176,7 @@ export function FeaturedCaseStudy() {
                     isHovered ? "translate-x-1" : "translate-x-0"
                   }`}
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

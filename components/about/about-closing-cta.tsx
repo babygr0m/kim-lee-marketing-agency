@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 
@@ -33,7 +34,7 @@ export function AboutClosingCTA() {
         {/* CTA — standardized to the canonical nav-bar pattern: cream
             outline + gold arrow → cream fill + black text/arrow on hover. */}
         <div className="mt-10 md:mt-12">
-          <a
+          <Link
             href="/contact"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -45,7 +46,7 @@ export function AboutClosingCTA() {
                 isHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

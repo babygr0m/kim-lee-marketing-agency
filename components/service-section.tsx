@@ -87,9 +87,12 @@ export function ServiceSection({ service, isLast }: { service: ServiceSectionDat
             ))}
           </div>
 
-          {/* CTA Link */}
+          {/* CTA Link — was previously `/#contact?service=...`, which is
+              malformed (anchor before query string is unreachable) AND
+              there is no `#contact` anchor on the homepage anymore.
+              Routes correctly to the dedicated /contact page now. */}
           <a
-            href={`/#contact?service=${service.slug}`}
+            href={`/contact?service=${service.slug}`}
             onMouseEnter={() => setIsLinkHovered(true)}
             onMouseLeave={() => setIsLinkHovered(false)}
             className="group inline-flex items-center gap-2 font-sans text-xs md:text-sm tracking-[0.2em] uppercase text-lma-gold transition-colors duration-300 border-b border-lma-gold/40 hover:border-lma-gold pb-1"

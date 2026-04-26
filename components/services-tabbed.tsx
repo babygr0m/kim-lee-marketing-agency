@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import type { ServiceSectionData } from "@/components/service-section"
@@ -199,11 +200,11 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
               </div>
 
               {/* CTA — centered, same boxed button styling as the rest of the site */}
-              <a
+              <Link
                 href={`/contact?service=${active.slug}`}
                 onMouseEnter={() => setIsLinkHovered(true)}
                 onMouseLeave={() => setIsLinkHovered(false)}
-                className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
+                className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
               >
                 Work with us
                 <ArrowRight
@@ -211,7 +212,7 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
                     isLinkHovered ? "translate-x-1" : "translate-x-0"
                   }`}
                 />
-              </a>
+              </Link>
             </div>
           ) : (
             // ---------- Image services 60/40 layout (unchanged) ----------
@@ -261,11 +262,11 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
 
                 {/* CTA + Prev/Next Controls */}
                 <div className="flex flex-wrap items-center gap-6 md:gap-8">
-                  <a
+                  <Link
                     href={`/contact?service=${active.slug}`}
                     onMouseEnter={() => setIsLinkHovered(true)}
                     onMouseLeave={() => setIsLinkHovered(false)}
-                    className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors"
+                    className="group inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-[18px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
                   >
                     Work with us
                     <ArrowRight
@@ -273,7 +274,7 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
                         isLinkHovered ? "translate-x-1" : "translate-x-0"
                       }`}
                     />
-                  </a>
+                  </Link>
 
                   <div className="flex items-center gap-2 ml-auto">
                     <button
