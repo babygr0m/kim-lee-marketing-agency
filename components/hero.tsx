@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { AnimatedStat } from "@/components/animated-stat"
@@ -37,13 +38,12 @@ export function Hero() {
             Now we&apos;ll build yours.
           </p>
 
-          {/* Hero primary CTA — standardized to the canonical nav-bar
-              pattern: cream outline + gold arrow → fully filled cream with
-              black text + black arrow on hover. `transition-colors
-              duration-200` keeps the color shift smooth. The arrow keeps
-              its own `translate-x-1` shift on hover for the same micro-
-              interaction the nav uses. */}
-          <button
+          {/* Hero primary CTA — uses Next.js Link for client-side routing
+              to /contact. Styled to match the canonical nav-bar pattern:
+              cream outline + gold arrow → filled cream with black text +
+              black arrow on hover. */}
+          <Link
+            href="/contact"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="lma-reveal-cta group mt-8 md:mt-12 inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-3 md:py-[14px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
@@ -54,7 +54,7 @@ export function Hero() {
                 isHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />
-          </button>
+          </Link>
         </div>
 
         {/* Bottom Section - Proof Bar.
