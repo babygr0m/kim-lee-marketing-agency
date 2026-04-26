@@ -37,15 +37,21 @@ export function Hero() {
             Now we&apos;ll build yours.
           </p>
 
+          {/* Hero primary CTA — standardized to the canonical nav-bar
+              pattern: cream outline + gold arrow → fully filled cream with
+              black text + black arrow on hover. `transition-colors
+              duration-200` keeps the color shift smooth. The arrow keeps
+              its own `translate-x-1` shift on hover for the same micro-
+              interaction the nav uses. */}
           <button
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="lma-reveal-cta group mt-8 md:mt-12 px-6 py-3 border border-lma-cream/60 text-lma-cream text-sm tracking-[0.1em] uppercase rounded-[4px] transition-all duration-300 hover:border-lma-cream flex items-center gap-3"
+            className="lma-reveal-cta group mt-8 md:mt-12 inline-flex items-center gap-3 border border-lma-cream/80 px-7 md:px-8 py-3 md:py-[14px] font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
           >
             Book a strategy call
             <ArrowRight
-              className={`w-4 h-4 transition-all duration-300 ${
-                isHovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+              className={`w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 ${
+                isHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />
           </button>

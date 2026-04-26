@@ -19,16 +19,18 @@ export function ServicesCTA() {
           Let&apos;s make it move.
         </p>
 
-        {/* CTA Button */}
+        {/* CTA Button — standardized to the canonical nav-bar pattern:
+            cream outline + gold arrow → cream fill + black text/arrow
+            on hover. */}
         <a
-          href="/#contact"
+          href="/contact"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="group inline-flex items-center gap-3 border border-lma-cream/60 px-8 md:px-10 py-4 md:py-5 font-sans text-xs md:text-sm uppercase tracking-[0.2em] text-lma-cream transition-colors duration-300 hover:border-lma-gold hover:text-lma-gold"
+          className="group inline-flex items-center gap-3 border border-lma-cream/80 px-8 md:px-10 py-4 md:py-5 font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
         >
           Book a Strategy Call
           <ArrowRight
-            className={`h-4 w-4 transition-transform duration-300 ${
+            className={`h-4 w-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 ${
               isHovered ? "translate-x-1" : "translate-x-0"
             }`}
           />

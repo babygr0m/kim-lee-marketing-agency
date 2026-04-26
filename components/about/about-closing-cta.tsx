@@ -30,17 +30,18 @@ export function AboutClosingCTA() {
           commerce engine that actually performs, we&apos;d love to hear from you.
         </p>
 
-        {/* CTA */}
+        {/* CTA — standardized to the canonical nav-bar pattern: cream
+            outline + gold arrow → cream fill + black text/arrow on hover. */}
         <div className="mt-10 md:mt-12">
           <a
             href="/contact"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="inline-flex items-center gap-3 border border-lma-cream/80 px-8 py-4 font-sans text-sm uppercase tracking-[0.15em] text-lma-cream transition-colors duration-300 hover:border-lma-gold hover:text-lma-gold md:px-10 md:py-5 md:text-base"
+            className="group inline-flex items-center gap-3 border border-lma-cream/80 px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200 md:px-10 md:py-5 md:text-sm"
           >
             Book a strategy call
             <ArrowRight
-              className={`h-4 w-4 transition-transform duration-300 md:h-5 md:w-5 ${
+              className={`h-4 w-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 md:h-5 md:w-5 ${
                 isHovered ? "translate-x-1" : "translate-x-0"
               }`}
             />

@@ -45,11 +45,16 @@ export function AboutPodcast() {
               made, and how brands break through.
             </p>
 
+            {/* "Listen now" tertiary link — was using a weak opacity fade
+                on hover. Switched to the same smooth color shift the rest
+                of the site uses (gold → cream) for consistency. The arrow
+                keeps its translate-x-1 hover for the standard micro-
+                interaction. */}
             <a
               href="#"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-lma-gold transition-opacity duration-200 hover:opacity-80 md:mt-10"
+              className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-lma-gold transition-colors duration-200 hover:text-lma-cream md:mt-10"
             >
               Listen now
               <ArrowRight

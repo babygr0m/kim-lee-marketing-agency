@@ -534,12 +534,16 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
         <p className="font-serif italic text-lma-gold text-xl md:text-2xl mb-10">
           Let&apos;s make it move.
         </p>
+        {/* Closing CTA — standardized to the canonical nav-bar pattern:
+            cream outline + gold arrow → cream fill + black text/arrow on
+            hover. (Was previously gold-outline / gold-fill — replaced for
+            visual consistency with every other primary CTA on the site.) */}
         <a
           href="/contact"
-          className="inline-flex items-center gap-3 border border-lma-gold px-8 py-4 font-sans text-xs md:text-sm tracking-[0.2em] uppercase text-lma-gold hover:bg-lma-gold hover:text-lma-black transition-colors"
+          className="group inline-flex items-center gap-3 border border-lma-cream/80 px-8 py-4 font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-lma-cream hover:bg-lma-cream hover:text-lma-black transition-colors duration-200"
         >
           Book a strategy call
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 text-lma-gold group-hover:text-lma-black transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>
     </section>
