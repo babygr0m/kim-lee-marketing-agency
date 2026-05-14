@@ -5,9 +5,9 @@ import { ArrowRight } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 
 type Visual =
-  | { type: "image"; src: string; alt: string; objectPosition?: string }
-  | { type: "video"; src: string; poster?: string; objectFit?: "cover" | "contain" }
-  | { type: "gradient"; gradient: string }
+  | { type: "image"; src: string; alt: string; objectPosition?: string; aspectClass?: string }
+  | { type: "video"; src: string; poster?: string; objectFit?: "cover" | "contain"; aspectClass?: string }
+  | { type: "gradient"; gradient: string; aspectClass?: string }
 
 const services: Array<{
   number: string
@@ -62,9 +62,11 @@ const services: Array<{
       type: "video",
       src: "/podcast.mp4",
       poster: "/me-and-who-els-cover.jpeg",
-      // 1920x1080 landscape source — letterbox inside the 4:5 portrait tile
-      // so the full frame is visible (top/bottom black bars match site bg).
-      objectFit: "contain",
+      // 1920x1080 landscape source — render at native landscape aspect so
+      // the video fills the tile edge-to-edge (no letterbox bars). The row
+      // uses items-center, so this tile sitting shorter than the others is
+      // vertically centered and reads cleanly.
+      aspectClass: "aspect-video",
     },
   },
   {
@@ -103,9 +105,10 @@ const services: Array<{
 ]
 
 function ServiceVisualTile({ visual }: { visual: Visual }) {
+  const aspect = visual.aspectClass ?? "aspect-[4/5]"
   if (visual.type === "image") {
     return (
-      <div className="relative aspect-[4/5] overflow-hidden border border-lma-cream/10">
+      <div className={`relative ${aspect} overflow-hidden border border-lma-cream/10`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={visual.src}
@@ -120,7 +123,7 @@ function ServiceVisualTile({ visual }: { visual: Visual }) {
   if (visual.type === "video") {
     const fit = visual.objectFit ?? "cover"
     return (
-      <div className="relative aspect-[4/5] overflow-hidden border border-lma-cream/10 bg-lma-black">
+      <div className={`relative ${aspect} overflow-hidden border border-lma-cream/10 bg-lma-black`}>
         <video
           autoPlay
           muted
@@ -138,7 +141,7 @@ function ServiceVisualTile({ visual }: { visual: Visual }) {
   }
   return (
     <div
-      className="relative aspect-[4/5] overflow-hidden border border-lma-cream/10"
+      className={`relative ${aspect} overflow-hidden border border-lma-cream/10`}
       style={{ background: visual.gradient }}
       aria-hidden="true"
     />
