@@ -164,18 +164,39 @@ export function ServiceVisual({ slug }: ServiceVisualProps) {
 
   if (slug === "podcast") {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_0.7fr] gap-4 md:gap-5 items-start">
-        <div className="relative aspect-square overflow-hidden border border-lma-cream/10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/me-and-who-els-cover.jpeg"
-            alt="Me and Who Els podcast cover art"
-            loading="lazy"
+      <div className="flex flex-col gap-4 md:gap-5">
+        {/* Landscape podcast clip — 1920x1080 source. Stacked on top of the
+            cover so the video carries the visual weight and the cover stays
+            as a brand-identity anchor below. */}
+        <div className="relative aspect-video overflow-hidden border border-lma-cream/10 bg-lma-black">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/me-and-who-els-cover.jpeg"
             className="absolute inset-0 h-full w-full object-cover"
-          />
+            aria-hidden="true"
+          >
+            <source src="/podcast.mp4" type="video/mp4" />
+          </video>
         </div>
-        <div className="flex flex-col gap-3">
-          <PhoneFrame src="/podcast.mp4" poster="/me-and-who-els-cover.jpeg" />
+
+        <div className="grid grid-cols-[0.5fr_1fr] gap-4 md:gap-5 items-center">
+          <div className="relative aspect-square overflow-hidden border border-lma-cream/10">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/me-and-who-els-cover.jpeg"
+              alt="Me and Who Els podcast cover art"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+          <p className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-lma-cream/70">
+            <span className="text-lma-gold">Me and Who Els</span>
+            <span className="text-lma-cream/60"> / Hosted by Kim Lee</span>
+          </p>
         </div>
       </div>
     )

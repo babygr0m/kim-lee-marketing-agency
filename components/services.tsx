@@ -6,7 +6,7 @@ import { useInView } from "@/hooks/use-in-view"
 
 type Visual =
   | { type: "image"; src: string; alt: string; objectPosition?: string }
-  | { type: "video"; src: string; poster?: string }
+  | { type: "video"; src: string; poster?: string; objectFit?: "cover" | "contain" }
   | { type: "gradient"; gradient: string }
 
 const services: Array<{
@@ -92,6 +92,9 @@ const services: Array<{
       type: "video",
       src: "/podcast.mp4",
       poster: "/me-and-who-els-cover.jpeg",
+      // 1920x1080 landscape source — letterbox inside the 4:5 portrait tile
+      // so the full frame is visible (top/bottom black bars match site bg).
+      objectFit: "contain",
     },
   },
 ]
@@ -112,6 +115,7 @@ function ServiceVisualTile({ visual }: { visual: Visual }) {
     )
   }
   if (visual.type === "video") {
+    const fit = visual.objectFit ?? "cover"
     return (
       <div className="relative aspect-[4/5] overflow-hidden border border-lma-cream/10 bg-lma-black">
         <video
@@ -121,7 +125,7 @@ function ServiceVisualTile({ visual }: { visual: Visual }) {
           playsInline
           preload="metadata"
           poster={visual.poster}
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
           aria-hidden="true"
         >
           <source src={visual.src} type="video/mp4" />
