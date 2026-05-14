@@ -219,7 +219,7 @@ export function ServiceVisual({ slug }: ServiceVisualProps) {
           </div>
           <p className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-lma-cream/70">
             <span className="text-lma-gold">Me and Who Els</span>
-            <span className="text-lma-cream/60"> / Hosted by Kim Lee</span>
+            <span className="text-lma-cream/60"> / Hosted by Elsy Guevara</span>
           </p>
         </div>
       </div>
