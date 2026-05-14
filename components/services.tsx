@@ -16,30 +16,11 @@ const services: Array<{
   description: string
   visual: Visual
 }> = [
+  // Asset-driven services lead — celebrity stills + campaign videos carry the
+  // visual weight at the top of the list. Gradient services follow at the
+  // bottom since they're abstract by design.
   {
     number: "01",
-    name: "TikTok Shop Management",
-    slug: "tiktok-shop",
-    description: "Verified TikTok Shop Affiliate Partner. We run the full creator commerce stack.",
-    visual: {
-      type: "gradient",
-      gradient:
-        "radial-gradient(circle at 30% 30%, rgba(255,107,107,0.55), transparent 60%), radial-gradient(circle at 70% 70%, rgba(201,169,97,0.5), transparent 65%), linear-gradient(135deg, #1a0f0a, #0a0a0a)",
-    },
-  },
-  {
-    number: "02",
-    name: "Meta & TikTok Shop Affiliate Marketing",
-    slug: "affiliate-marketing",
-    description: "Performance-driven affiliate programs across Meta and TikTok Shop. Our core specialty.",
-    visual: {
-      type: "gradient",
-      gradient:
-        "radial-gradient(circle at 25% 75%, rgba(110,180,255,0.45), transparent 60%), radial-gradient(circle at 75% 25%, rgba(201,169,97,0.45), transparent 60%), linear-gradient(135deg, #0a1220, #0a0a0a)",
-    },
-  },
-  {
-    number: "03",
     name: "Influencer Marketing",
     slug: "influencer",
     description: "Micro to A-list. Sourced, contracted, and managed end-to-end.",
@@ -51,18 +32,7 @@ const services: Array<{
     },
   },
   {
-    number: "04",
-    name: "Paid Media",
-    slug: "paid-media",
-    description: "ROAS-first paid strategy across TikTok, Meta, and YouTube.",
-    visual: {
-      type: "gradient",
-      gradient:
-        "radial-gradient(circle at 40% 40%, rgba(180,120,255,0.45), transparent 60%), radial-gradient(circle at 60% 80%, rgba(201,169,97,0.45), transparent 55%), linear-gradient(135deg, #14091a, #0a0a0a)",
-    },
-  },
-  {
-    number: "05",
+    number: "02",
     name: "Creative & Campaign Production",
     slug: "creative",
     description: "In-house creative team built to stop the scroll and convert.",
@@ -73,7 +43,7 @@ const services: Array<{
     },
   },
   {
-    number: "06",
+    number: "03",
     name: "Content Creation & Social Media Management",
     slug: "social-media",
     description: "End-to-end social management. Built around your brand calendar.",
@@ -84,7 +54,7 @@ const services: Array<{
     },
   },
   {
-    number: "07",
+    number: "04",
     name: "Podcast Production & Management",
     slug: "podcast",
     description: "Podcasts treated as a full brand channel, not an afterthought.",
@@ -95,6 +65,39 @@ const services: Array<{
       // 1920x1080 landscape source — letterbox inside the 4:5 portrait tile
       // so the full frame is visible (top/bottom black bars match site bg).
       objectFit: "contain",
+    },
+  },
+  {
+    number: "05",
+    name: "TikTok Shop Management",
+    slug: "tiktok-shop",
+    description: "Verified TikTok Shop Affiliate Partner. We run the full creator commerce stack.",
+    visual: {
+      type: "gradient",
+      gradient:
+        "radial-gradient(circle at 30% 30%, rgba(255,107,107,0.55), transparent 60%), radial-gradient(circle at 70% 70%, rgba(201,169,97,0.5), transparent 65%), linear-gradient(135deg, #1a0f0a, #0a0a0a)",
+    },
+  },
+  {
+    number: "06",
+    name: "Meta & TikTok Shop Affiliate Marketing",
+    slug: "affiliate-marketing",
+    description: "Performance-driven affiliate programs across Meta and TikTok Shop. Our core specialty.",
+    visual: {
+      type: "gradient",
+      gradient:
+        "radial-gradient(circle at 25% 75%, rgba(110,180,255,0.45), transparent 60%), radial-gradient(circle at 75% 25%, rgba(201,169,97,0.45), transparent 60%), linear-gradient(135deg, #0a1220, #0a0a0a)",
+    },
+  },
+  {
+    number: "07",
+    name: "Paid Media",
+    slug: "paid-media",
+    description: "ROAS-first paid strategy across TikTok, Meta, and YouTube.",
+    visual: {
+      type: "gradient",
+      gradient:
+        "radial-gradient(circle at 40% 40%, rgba(180,120,255,0.45), transparent 60%), radial-gradient(circle at 60% 80%, rgba(201,169,97,0.45), transparent 55%), linear-gradient(135deg, #14091a, #0a0a0a)",
     },
   },
 ]

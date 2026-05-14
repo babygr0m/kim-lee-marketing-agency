@@ -20,17 +20,20 @@ type Tile = {
   objectPosition?: string
 }
 
+// Order matters — first item renders as the big hero tile in the 1+2 layout.
+// Ty Dolla solo studio portrait is the most iconic single image; F21 stills
+// fill the secondary stack with celebrity range.
 const influencerGrid: Tile[] = [
-  {
-    src: "/case-studies/f21-rolling-loud-featured.jpg",
-    alt: "Forever 21 x Rolling Loud — influencer campaign",
-    caption: { primary: "Rolling Loud", secondary: "F21" },
-    objectPosition: "center top",
-  },
   {
     src: "/influencer/ty-dolla-01.jpg",
     alt: "Ty Dolla $ign — Men's Health editorial",
     caption: { primary: "Ty Dolla $ign", secondary: "Men's Health" },
+    objectPosition: "center top",
+  },
+  {
+    src: "/case-studies/f21-rolling-loud-featured.jpg",
+    alt: "Forever 21 x Rolling Loud — influencer campaign",
+    caption: { primary: "Rolling Loud", secondary: "F21" },
     objectPosition: "center top",
   },
   {
@@ -130,11 +133,32 @@ function PhoneFrame({
 
 export function ServiceVisual({ slug }: ServiceVisualProps) {
   if (slug === "influencer") {
+    // 1 big hero tile on the left + 2 smaller tiles stacked on the right.
+    // Bigger tiles than the previous 3-up so the celebrity proof reads at a
+    // glance instead of feeling cramped. Hero tile fills the full column
+    // height; right column tiles stay 4:5 portrait.
+    const [hero, second, third] = influencerGrid
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-        {influencerGrid.map((tile, i) => (
-          <ImageTile key={i} tile={tile} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+        {/* Hero tile — Ty Dolla full body. Spans both rows of the right
+            column at desktop, stacks first at mobile. */}
+        <div className="sm:row-span-2 flex flex-col">
+          <div className="relative flex-1 overflow-hidden border border-lma-cream/10 bg-lma-cream/[0.02] aspect-[4/5] sm:aspect-auto sm:min-h-[460px]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={hero.src}
+              alt={hero.alt}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: hero.objectPosition ?? "center" }}
+            />
+          </div>
+          <Caption caption={hero.caption} />
+        </div>
+
+        {/* Right column tiles */}
+        <ImageTile tile={second} />
+        <ImageTile tile={third} />
       </div>
     )
   }
