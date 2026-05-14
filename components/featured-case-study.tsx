@@ -36,7 +36,7 @@ export function FeaturedCaseStudy() {
   return (
     <section
       ref={ref}
-      className="bg-lma-black px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-32"
+      className="bg-lma-black px-6 md:px-12 lg:px-20 pt-10 md:pt-14 lg:pt-20 pb-16 md:pb-24 lg:pb-32"
     >
       <div className="max-w-7xl mx-auto">
         {/* Two Column Layout — vertically centered against each other so the

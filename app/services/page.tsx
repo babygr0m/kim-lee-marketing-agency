@@ -47,7 +47,7 @@ const services: ServiceTabData[] = [
     shortLabel: "Influencer",
     name: "Influencer Marketing",
     kicker: "Micro to A-list.",
-    body: "From emerging micro-creators to A-list celebrities, LMA sources, negotiates, contracts, and manages influencer partnerships from start to finish. Our creator network spans every major platform and demographic, and our decade of relationship-building means we move at the speed of culture.",
+    body: "Micro to A-list. Sourced, negotiated, contracted, and managed from start to finish. A decade of relationship-building means we move at the speed of culture.",
     campaigns: ["CAMPAIGN-03-A", "CAMPAIGN-03-B", "CAMPAIGN-03-C"],
     stats: [
       { value: "10+ YRS", label: "Relationships" },
@@ -75,7 +75,7 @@ const services: ServiceTabData[] = [
     shortLabel: "Creative",
     name: "Creative & Campaign Production",
     kicker: "Built to stop the scroll.",
-    body: "LMA's in-house creative team produces high-quality, culturally-driven campaign videos built to stop the scroll and convert. From concept and scripting to production and delivery, we create content that doesn't just look good, it performs across editorial campaigns, brand videos, and TikTok-native content.",
+    body: "An in-house team that produces culturally-driven campaign content built to stop the scroll and convert. From concept and scripting to production and delivery.",
     campaigns: ["CAMPAIGN-05-A", "CAMPAIGN-05-B", "CAMPAIGN-05-C"],
     stats: [
       { value: "In-House", label: "Creative Team" },
@@ -89,7 +89,7 @@ const services: ServiceTabData[] = [
     shortLabel: "Social Media",
     name: "Content Creation & Social Media Management",
     kicker: "End-to-end social presence.",
-    body: "LMA manages your brand's social presence end-to-end, from content strategy and creation to posting, community management, and performance reporting. We build social calendars that stay culturally relevant and on-brand, consistently turning followers into customers.",
+    body: "End-to-end brand-presence management. Content, calendar, community, and reporting. Built to stay culturally relevant and on-brand at the speed of the platform.",
     campaigns: ["CAMPAIGN-06-A", "CAMPAIGN-06-B", "CAMPAIGN-06-C"],
     stats: [
       { value: "Always", label: "On-Brand" },
@@ -103,7 +103,7 @@ const services: ServiceTabData[] = [
     shortLabel: "Podcast",
     name: "Podcast Production & Management",
     kicker: "A full brand channel.",
-    body: "LMA produces and manages Me and Who Els from the ground up, and brings that same capability to brand partners. From guest booking and production to clip distribution and sponsorship development, we treat podcasts as a full brand channel, not an afterthought.",
+    body: "We produce Me and Who Els from the ground up, and bring that same capability to brand partners. Treated as a full brand channel, not an afterthought.",
     campaigns: ["CAMPAIGN-07-A", "CAMPAIGN-07-B", "CAMPAIGN-07-C"],
     stats: [
       { value: "In-House", label: "Production" },

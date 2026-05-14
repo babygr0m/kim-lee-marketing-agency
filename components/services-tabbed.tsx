@@ -178,6 +178,51 @@ export function ServicesTabbed({ services }: { services: ServiceTabData[] }) {
                 {active.body}
               </p>
 
+              {/* TikTok Shop only: 3-part service breakdown
+                  (Manage the Shop / Affiliate Marketing / Lives) requested
+                  by Kim — modeled after the reference site she showed on
+                  the call. Hidden on the other 2 abstract services. */}
+              {active.slug === "tiktok-shop" && (
+                <div className="w-full max-w-[820px] mx-auto grid grid-cols-1 md:grid-cols-3 mb-10 md:mb-14 text-left">
+                  {[
+                    {
+                      tag: "i",
+                      title: "Manage the Shop",
+                      body: "End-to-end shop setup, optimization, and operations.",
+                    },
+                    {
+                      tag: "ii",
+                      title: "Affiliate Marketing",
+                      body: "GMV Max campaigns, Spark Code activations, creator commerce.",
+                    },
+                    {
+                      tag: "iii",
+                      title: "Lives",
+                      body: "Live shopping events, host sourcing, real-time conversion ops.",
+                    },
+                  ].map((part, index) => (
+                    <div
+                      key={part.tag}
+                      className={`flex flex-col gap-2 py-4 md:py-0 md:px-5 ${
+                        index !== 0
+                          ? "border-t md:border-t-0 md:border-l border-lma-cream/20"
+                          : ""
+                      }`}
+                    >
+                      <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-lma-gold">
+                        {part.tag}
+                      </span>
+                      <h3 className="font-[family-name:var(--font-anton)] text-lma-cream text-xl md:text-2xl uppercase tracking-tight">
+                        {part.title}
+                      </h3>
+                      <p className="font-sans text-sm text-lma-cream/75 leading-relaxed">
+                        {part.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {/* Stats Row — centered, evenly distributed */}
               <div className="w-full max-w-[720px] mx-auto grid grid-cols-1 md:grid-cols-3 mb-10 md:mb-14">
                 {active.stats.map((stat, index) => (

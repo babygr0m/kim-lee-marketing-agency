@@ -431,14 +431,18 @@ export function CaseStudiesTabbed({ caseStudies }: { caseStudies: CaseStudyData[
                         className="absolute inset-0 pointer-events-none bg-black/0 group-hover:bg-black/15 transition-[background-color] duration-150 group-hover:duration-200"
                       />
                     </div>
-                    <p className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase">
-                      {/* Gold celebrity / category name shifts to brighter
-                          gold (#D4B570) on row hover, smooth 200ms. */}
-                      <span className="text-lma-gold group-hover:text-[#D4B570] transition-colors duration-200">
-                        {thumb.primaryLabel}
-                      </span>
-                      <span className="text-lma-cream/60"> / {thumb.secondaryLabel}</span>
-                    </p>
+                    {thumb.primaryLabel ? (
+                      <p className="mt-3 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase">
+                        {/* Gold celebrity / category name shifts to brighter
+                            gold (#D4B570) on row hover, smooth 200ms. */}
+                        <span className="text-lma-gold group-hover:text-[#D4B570] transition-colors duration-200">
+                          {thumb.primaryLabel}
+                        </span>
+                        {thumb.secondaryLabel && (
+                          <span className="text-lma-cream/60"> / {thumb.secondaryLabel}</span>
+                        )}
+                      </p>
+                    ) : null}
                   </div>
                 ) : (
                   <YouTubeThumbnail

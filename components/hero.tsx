@@ -17,14 +17,23 @@ export function Hero() {
 
   return (
     <section className="relative h-screen w-full bg-lma-black overflow-hidden">
-      {/* Flat dark background - no video, no imagery */}
-      <div className="absolute inset-0 bg-lma-black" />
+      {/* Background — autoplay-loop hero video when /hero.mp4 exists in /public,
+          otherwise the editorial poster still alone. Black overlay sits on top
+          to keep cream display text readable against either background. */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/hero-poster.jpg"
+        className="absolute inset-0 w-full h-full object-cover"
+        aria-hidden="true"
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-lma-black/60" />
 
-      {/* Content Container — bumped bottom padding from `pb-8 md:pb-12`
-          → `pb-16 md:pb-24` to push the proof bar away from the viewport
-          edge, and the proof bar itself now has its own top margin so it
-          sits well below the headline / CTA block instead of being crammed
-          against it. */}
       <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-12 lg:px-20 pt-24 pb-16 md:pb-24">
         {/* Middle Section - Headline & CTA.
             Hero stagger reveal classes (lma-reveal-*) drive the editorial

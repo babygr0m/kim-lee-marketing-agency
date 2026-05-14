@@ -252,15 +252,16 @@ const caseStudies: CaseStudyData[] = [
         watchHref: "/case-studies/sol-de-janeiro-featured.webp",
       },
     },
-    // Two hero stills — Bum Bum Cream product hero + brand TikTok Shop
-    // moment. Rendered in the same narrower 2-up grid as Ivy.
+    // Labels stripped per Kim — SDJ engagement was affiliate + influencer
+    // only, the editorial / lifestyle / product range / lifestyle-tiktok
+    // labels were mislabeling the actual scope of work.
     thumbnails: [
       {
         videoId: "sol-thumb-1",
         href: "https://www.instagram.com/soldejaneiro/",
-        alt: "Sol de Janeiro Brazilian Bum Bum Cream — hero product still",
-        primaryLabel: "Bum Bum Cream",
-        secondaryLabel: "Hero",
+        alt: "Sol de Janeiro — campaign still",
+        primaryLabel: "",
+        secondaryLabel: "",
         imageSrc: "/case-studies/sol-de-janeiro-thumb-1.webp",
         aspectClass: "aspect-[3/4]",
         objectPosition: "center",
@@ -268,13 +269,11 @@ const caseStudies: CaseStudyData[] = [
       {
         videoId: "sol-thumb-4",
         href: "https://www.instagram.com/soldejaneiro/",
-        alt: "Sol de Janeiro brand TikTok Shop content — Cheirosa 62 application moment",
-        primaryLabel: "Brand",
-        secondaryLabel: "TikTok Shop",
+        alt: "Sol de Janeiro — campaign still",
+        primaryLabel: "",
+        secondaryLabel: "",
         imageSrc: "/case-studies/sol-de-janeiro-thumb-4.webp",
         aspectClass: "aspect-[3/4]",
-        // Subject's face/hand sits right of center — bias right so the
-        // brand moment stays in the cropped portrait frame.
         objectPosition: "right center",
       },
     ],
